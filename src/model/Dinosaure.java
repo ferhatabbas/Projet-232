@@ -4,7 +4,6 @@ import java.util.Random;
 public class Dinosaure {
 	
 	public String name;
-	public int dinosaureID;
 	public int lifePoint;
 	public int strenght;
 	public int speed;
@@ -29,9 +28,9 @@ public class Dinosaure {
 		setDefenseRandom();
 	}
 	
-	public Dinosaure(int dinosaureID)
+	public Dinosaure(String name)
 	{
-		setDinosaureID(dinosaureID);
+		setName(name);
 		setLifePoinRandom();
 		setStrenghtRandom();
 		setSpeedRandom();
@@ -41,7 +40,6 @@ public class Dinosaure {
 	public Dinosaure(String name, int dinosaureID, int lifePoint, int strenght, int speed, int defense, int xp)
 	{
 		setName(name);
-		setDinosaureID(dinosaureID);
 		setLifePoint(lifePoint);
 		setStrenght(strenght);
 		setSpeed(speed);
@@ -51,17 +49,17 @@ public class Dinosaure {
 	
 	void setDefenseRandom() 
 	{		
-		setDefense(Random(BASE_DEFENSE_POINT_DINO_MIN, BASE_DEFENSE_POINT_DINO_MAX));		
+		setDefense(Random(BASE_DEFENSE_POINT_DINO_MIN, BASE_DEFENSE_POINT_DINO_MAX));
 	}
 
 	void setSpeedRandom() 
 	{
-		setSpeed(Random(BASE_SPEED_POINT_DINO_MIN, BASE_SPEED_POINT_DINO_MAX));		
+		setSpeed(Random(BASE_SPEED_POINT_DINO_MIN, BASE_SPEED_POINT_DINO_MAX));
 	}
 
 	void setStrenghtRandom() 
 	{
-		setStrenght(Random(BASE_STRENGHT_POINT_DINO_MIN, BASE_STRENGHT_POINT_DINO_MAX));		
+		setStrenght(Random(BASE_STRENGHT_POINT_DINO_MIN, BASE_STRENGHT_POINT_DINO_MAX));
 	}
 
 	void setLifePoinRandom() 
@@ -75,14 +73,6 @@ public class Dinosaure {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public int getDinosaureID() {
-		return dinosaureID;
-	}
-
-	public void setDinosaureID(int dinosaureID) {
-		this.dinosaureID = dinosaureID;
 	}
 	
 	public int getLifePoint() {
