@@ -45,7 +45,7 @@ public class Menu {
 			}
 
 		}
-
+	lecture.close();
 	}
 
 }
