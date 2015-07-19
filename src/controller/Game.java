@@ -32,7 +32,7 @@ public class Game {
         if (_dinos.stream().filter(d -> d.getName() == dino.getName()).count() == 0) {
             _dinos.add(dino);
         }else{
-            throw new Exception("There is a dino with this name allready existing");
+            throw new Exception("There is already a dino named \"" + dino.getName() + "\"");
         }
     }
 }
