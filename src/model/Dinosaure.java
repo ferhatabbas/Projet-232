@@ -1,8 +1,10 @@
 package model;
+
+import java.util.Observable;
 import java.util.Random;
 
-public class Dinosaure {
-	
+public class Dinosaure extends Observable {
+	private boolean etat;
 	public String name;
 	public int lifePoint;
 	public int strenght;
@@ -121,7 +123,11 @@ public class Dinosaure {
 		int R = r.nextInt((High - Low) + 1) + Low;
 		return R;
 	}
-	
+	public void setEtat(boolean etat){
+		this.etat=etat;
+		setChanged();
+		notifyObservers(this.etat);
+	}
 	
 	/*
 	public boolean equals(Object otherDinosaure)

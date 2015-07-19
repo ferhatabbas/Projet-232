@@ -7,11 +7,11 @@
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="inheritedJdk" />
-    <orderEntry type="module-library">
-      <library>
+    <orderEntry type="jdk" jdkName="IntelliJ IDEA IU-141.178.9" jdkType="IDEA JDK" />
+    <orderEntry type="module-library" exported="">
+      <library name="junit4">
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../junit-4.7.jar!/" />
+          <root url="jar://$APPLICATION_HOME_DIR$/lib/junit-4.11.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
