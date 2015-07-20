@@ -1,0 +1,25 @@
+<savegame>
+    <username>Alexandre Landry</username>
+    <dinosaures>
+        <dinosaure>
+            <name>Rex</name>
+            <lifepoint>13</lifepoint>
+            <strenght>5</strenght>
+            <speed>4</speed>
+            <defense>5</defense>
+            <xp>0</xp>
+        </dinosaure>
+        <dinosaure>
+            <name>Bronto</name>
+            <lifepoint>16</lifepoint>
+            <strenght>5</strenght>
+            <speed>3</speed>
+            <defense>6</defense>
+            <xp>0</xp>
+        </dinosaure>
+    </dinosaures>
+    <logs>
+        <entry type="dinoCreation" datetime="2015-07-20 14:59:30.252">Rex</entry>
+        <entry type="dinoCreation" datetime="2015-07-20 15:01:16.864">Bronto</entry>
+    </logs>
+</savegame>
