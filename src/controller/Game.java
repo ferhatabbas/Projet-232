@@ -1,6 +1,7 @@
 package controller;
 
 import model.Dinosaure;
+import model.Log;
 import java.util.ArrayList;
 
 /**
@@ -10,9 +11,11 @@ public class Game {
 
     private String _userName;
     private ArrayList<Dinosaure> _dinos;
+    private ArrayList<Log> _logs;
 
     public Game(){
         _dinos = new ArrayList<Dinosaure>();
+        _logs = new ArrayList<Log>();
     }
 
     public String getUserName() {
@@ -25,14 +28,32 @@ public class Game {
 
     public Dinosaure getDino(String name)
     {
-        return _dinos.stream().filter(d -> d.getName() == name).findFirst().get();
+
+        for(Dinosaure d : _dinos){
+            if (d.getName() == name){
+                return d;
+            }
+        }
+
+        return null;
+    }
+
+    public ArrayList<String> getListOfDinos(){
+        ArrayList<String> names = new ArrayList<String>();
+        for(Dinosaure d : _dinos){
+            names.add(d.getName());
+        }
+        return names;
     }
 
     public void addDino(Dinosaure dino) throws Exception {
-        if (_dinos.stream().filter(d -> d.getName() == dino.getName()).count() == 0) {
-            _dinos.add(dino);
-        }else{
-            throw new Exception("There is already a dino named \"" + dino.getName() + "\"");
+
+        for(Dinosaure d : _dinos){
+            if (d.getName() == dino.getName()){
+                throw new Exception("There is already a dino named \"" + dino.getName() + "\"");
+            }
         }
+
+        _dinos.add(dino);
     }
 }

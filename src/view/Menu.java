@@ -10,11 +10,11 @@ public class Menu {
 
 	public static void main(String[] args) {
 
-		int choix = 0;
+		int choix;
 		Scanner lecture = new Scanner(System.in);
 
 		System.out.println("***  WELCOME TO DINOGAME ! ***");
-		while(choix != 3){
+		do{
 			System.out.println("Enter");
 			System.out.println("1 : to start a new game");
 			System.out.println("2 : to load a game");
@@ -47,8 +47,7 @@ public class Menu {
 				case 7 :break;
 
 			}
-
-		}
+		}while(choix != 3);
 	lecture.close();
 	}
 

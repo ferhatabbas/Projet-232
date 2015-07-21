@@ -8,6 +8,8 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import sun.reflect.annotation.ExceptionProxy;
 
+import java.util.ArrayList;
+
 /**
  * Created by Alexandre on 2015-07-18.
  */
@@ -57,5 +59,16 @@ public class GameTest {
         exception.expect(Exception.class);
         myGame.addDino(secondDino);
 
+    }
+
+    @Test
+    public void testListOfDinos(){
+        Dinosaure firstDino = new Dinosaure("Rex");
+        try {
+            myGame.addDino(firstDino);
+        }catch (Exception e) {}
+        ArrayList<String> names = myGame.getListOfDinos();
+        assertTrue(names.size() == 1);
+        assertTrue(names.get(0) == "Rex");
     }
 }
