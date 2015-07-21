@@ -17,9 +17,6 @@ public class GameTest {
 
     Game myGame;
 
-    @Rule
-    public final ExpectedException exception = ExpectedException.none();
-
     @Before
     public void setup()
     {
@@ -35,38 +32,22 @@ public class GameTest {
     @Test
     public void testAddDino()
     {
-        Dinosaure firstDino = new Dinosaure("Rex");
-        try {
-            myGame.addDino(firstDino);
-        }catch (Exception e){
-            fail();
-        }
-        Dinosaure secondDino = myGame.getDino("Rex");
-        assertEquals(firstDino, secondDino);
+        myGame.createDino("Rex");
+
+        Dinosaure d = myGame.getDino("Rex");
+        assertNotNull(d);
     }
 
     @Test
     public void testAddMultipleDino() throws Exception {
-        Dinosaure firstDino = new Dinosaure("Rex");
-        Dinosaure secondDino = new Dinosaure("Rex");
-
-        try{
-            myGame.addDino(firstDino);
-        }catch (Exception e){
-            fail();
-        }
-
-        exception.expect(Exception.class);
-        myGame.addDino(secondDino);
-
+        assertTrue(myGame.createDino("Rex"));
+        assertFalse(myGame.createDino("Rex"));
     }
 
     @Test
     public void testListOfDinos(){
-        Dinosaure firstDino = new Dinosaure("Rex");
-        try {
-            myGame.addDino(firstDino);
-        }catch (Exception e) {}
+        myGame.createDino("Rex");
+
         ArrayList<String> names = myGame.getListOfDinos();
         assertTrue(names.size() == 1);
         assertTrue(names.get(0) == "Rex");

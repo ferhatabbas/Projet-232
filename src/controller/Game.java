@@ -18,24 +18,19 @@ public class Game {
         _logs = new ArrayList<Log>();
     }
 
-    public String getUserName() {
-        return _userName;
-    }
-
-    public void setUserName(String userName) {
-        this._userName = userName;
-    }
-
-    public Dinosaure getDino(String name)
+    public void loadGameFromXml(String username)
     {
+        //TODO
+    }
 
-        for(Dinosaure d : _dinos){
-            if (d.getName() == name){
-                return d;
-            }
+    public boolean createDino(String name){
+        Dinosaure d = new Dinosaure(name);
+        try {
+            addDino(d);
+        }catch (Exception e){
+            return false;
         }
-
-        return null;
+        return true;
     }
 
     public ArrayList<String> getListOfDinos(){
@@ -46,7 +41,27 @@ public class Game {
         return names;
     }
 
-    public void addDino(Dinosaure dino) throws Exception {
+    public Dinosaure getDino(String name)
+    {
+
+        for(Dinosaure d : _dinos){
+            if (d.getName().equals(name)){
+                return d;
+            }
+        }
+
+        return null;
+    }
+
+    public String getUserName() {
+        return _userName;
+    }
+
+    public void setUserName(String userName) {
+        this._userName = userName;
+    }
+
+    private void addDino(Dinosaure dino) throws Exception {
 
         for(Dinosaure d : _dinos){
             if (d.getName() == dino.getName()){

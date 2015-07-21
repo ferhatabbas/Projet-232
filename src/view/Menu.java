@@ -1,7 +1,9 @@
 package view;
 
 import controller.Game;
+import model.Dinosaure;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 /**
  * 
@@ -27,6 +29,7 @@ public class Menu {
 	
 			System.out.println("Enter a number to choose");
 			choix = _lecture.nextInt();
+			_lecture.nextLine();
 			
 			switch(choix){
 				case 1 :
@@ -41,10 +44,16 @@ public class Menu {
 	}
 
 	private static void createNewGame() {
+		System.out.println("Please enter your username : ");
+		String username = _lecture.nextLine();
+		_game.setUserName(username);
 		secondMenu();
 	}
 
 	private static void loadGame() {
+		System.out.println("Please enter your username : ");
+		String username = _lecture.nextLine();
+		_game.loadGameFromXml(username);
 		secondMenu();
 	}
 
@@ -59,6 +68,7 @@ public class Menu {
 			System.out.println("4 : to quit");
 
 			choix = _lecture.nextInt();
+			_lecture.nextLine();
 
 			switch(choix){
 				case 1 :
@@ -75,14 +85,42 @@ public class Menu {
 	}
 
 	private static void createNewDino() {
-
+		System.out.println("Please enter the name of the dinosaur : ");
+		String name = _lecture.nextLine();
+		if(_game.createDino(name))
+		{
+			System.out.println("Creation successfull");
+		}else
+		{
+			System.out.println("Creation failed");
+		}
 	}
 
 	private static void seeAllDinos() {
-		
+		ArrayList<String> dinos = _game.getListOfDinos();
+		for(String d : dinos){
+			System.out.println("Dinosaure : " + d);
+		}
 	}
 
 	private static void seeDino() {
-		
+		System.out.println("Please enter the name of the dinosaur : ");
+		String name = _lecture.nextLine();
+		Dinosaure d = _game.getDino(name);
+
+		if(d != null){
+			ShowDino(d);
+		}else{
+			System.out.println("No dinosaur found");
+		}
+	}
+
+	private static void ShowDino(Dinosaure d) {
+		System.out.println("Name : " + d.getName());
+		System.out.println("Lifepoint : " + d.getLifePoint());
+		System.out.println("Strength : " + d.getStrenght());
+		System.out.println("Speed : " + d.getSpeed());
+		System.out.println("Defense : " + d.getDefense());
+		System.out.println("XP : " + d.getXp());
 	}
 }
