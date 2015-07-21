@@ -1,5 +1,7 @@
 package view;
 
+import controller.Game;
+
 import java.util.Scanner;
 /**
  * 
@@ -8,10 +10,13 @@ import java.util.Scanner;
  */
 public class Menu {
 
+	public static Scanner _lecture = new Scanner(System.in);
+	public static Game _game;
+
 	public static void main(String[] args) {
 
 		int choix;
-		Scanner lecture = new Scanner(System.in);
+		_game = new Game();
 
 		System.out.println("***  WELCOME TO DINOGAME ! ***");
 		do{
@@ -21,34 +26,63 @@ public class Menu {
 			System.out.println("3 : to quit");
 	
 			System.out.println("Enter a number to choose");
-			choix = lecture.nextInt();
+			choix = _lecture.nextInt();
 			
 			switch(choix){
-				case 1 ://TO DO creer un fichier xml
-						System.out.println("Enter");
-						System.out.println("4 : to create a dinosaur");
-						System.out.println("5 : to see a dinosaure");
-						System.out.println("6 : to save your game");
-						System.out.println("7 : to quit");
-						choix = lecture.nextInt();
-						break;
-				case 2 ://TO DO charger un fichier xml
-						System.out.println("Enter");
-						System.out.println("4 : to create a dinosaur");
-						System.out.println("5 : to see a dinosaure");
-						System.out.println("6 : to save your game");
-						System.out.println("7 : to quit");
-						choix = lecture.nextInt();
-						break;
-				case 3 :return;
-				case 4 : // creer un dinosaure
-				case 5 : //voir le dinosaure
-				case 6 : //sauvegarder
-				case 7 :break;
-
+				case 1 :
+					createNewGame();
+					break;
+				case 2 :
+					loadGame();
+					break;
 			}
 		}while(choix != 3);
-	lecture.close();
+		_lecture.close();
 	}
 
+	private static void createNewGame() {
+		secondMenu();
+	}
+
+	private static void loadGame() {
+		secondMenu();
+	}
+
+	public static void secondMenu()
+	{
+		int choix;
+		do {
+			System.out.println("Enter");
+			System.out.println("1 : to create a dinosaur");
+			System.out.println("2 : to see all dinosaurs");
+			System.out.println("3 : to see a dinosaur");
+			System.out.println("4 : to quit");
+
+			choix = _lecture.nextInt();
+
+			switch(choix){
+				case 1 :
+					createNewDino();
+					break;
+				case 2 :
+					seeAllDinos();
+					break;
+				case 3 :
+					seeDino();
+					break;
+			}
+		}while (choix != 4);
+	}
+
+	private static void createNewDino() {
+
+	}
+
+	private static void seeAllDinos() {
+		
+	}
+
+	private static void seeDino() {
+		
+	}
 }
