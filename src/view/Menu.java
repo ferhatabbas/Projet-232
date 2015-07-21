@@ -1,7 +1,11 @@
 package view;
 
 import java.util.Scanner;
-
+/**
+ * 
+ * @author carolenaka, sebastien and vahei
+ *
+ */
 public class Menu {
 
 	public static void main(String[] args) {
@@ -9,31 +13,31 @@ public class Menu {
 		int choix = 0;
 		Scanner lecture = new Scanner(System.in);
 
-		System.out.println("***  BIENVENUE DANS DINOGAME ! ***");
+		System.out.println("***  WELCOME TO DINOGAME ! ***");
 		while(choix != 3){
-			System.out.println("Saisir");
-			System.out.println("1 : pour creer une nouvelle partie");
-			System.out.println("2 : pour charger une  partie");
-			System.out.println("3 : pour quitter");
+			System.out.println("Enter");
+			System.out.println("1 : to start a new game");
+			System.out.println("2 : to load a game");
+			System.out.println("3 : to quit");
 	
-			System.out.println("Saisir un chiffre pour la selection");
+			System.out.println("Enter a number to choose");
 			choix = lecture.nextInt();
 			
 			switch(choix){
 				case 1 ://TO DO creer un fichier xml
-						System.out.println("Saisir");
-						System.out.println("4 : pour creer un dinosaure");
-						System.out.println("5 : pour voir le dinosaure");
-						System.out.println("6 : pour sauvegarder");
-						System.out.println("7 : pour quitter");
+						System.out.println("Enter");
+						System.out.println("4 : to create a dinosaur");
+						System.out.println("5 : to see a dinosaure");
+						System.out.println("6 : to save your game");
+						System.out.println("7 : to quit");
 						choix = lecture.nextInt();
 						break;
 				case 2 ://TO DO charger un fichier xml
-						System.out.println("Saisir");
-						System.out.println("4 : pour creer un dinosaure");
-						System.out.println("5 : pour voir le dinosaure");
-						System.out.println("6 : pour sauvegarder");
-						System.out.println("7 : pour quitter");
+						System.out.println("Enter");
+						System.out.println("4 : to create a dinosaur");
+						System.out.println("5 : to see a dinosaure");
+						System.out.println("6 : to save your game");
+						System.out.println("7 : to quit");
 						choix = lecture.nextInt();
 						break;
 				case 3 :return;
