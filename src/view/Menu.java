@@ -18,7 +18,6 @@ public class Menu {
 	public static void main(String[] args) {
 
 		int choix;
-		_game = new Game();
 
 		System.out.println("***  WELCOME TO DINOGAME ! ***");
 		do{
@@ -30,6 +29,8 @@ public class Menu {
 			System.out.println("Enter a number to choose");
 			choix = _lecture.nextInt();
 			_lecture.nextLine();
+
+			_game = new Game();
 			
 			switch(choix){
 				case 1 :
