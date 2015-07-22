@@ -47,7 +47,7 @@ public class Menu {
 	private static void createNewGame() {
 		System.out.println("Please enter your username : ");
 		String username = _lecture.nextLine();
-		_game.setUserName(username);
+		_game.initialize(username);
 		secondMenu();
 	}
 

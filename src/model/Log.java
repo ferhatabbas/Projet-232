@@ -7,17 +7,17 @@ import java.util.Date;
  */
 public class Log {
 
-    private final int TYPE_CREATION_GAME = 0;
-    private final int TYPE_CREATION_DINOSAURE = 1;
+    private static final int TYPE_CREATION_GAME = 0;
+    private static final int TYPE_CREATION_DINOSAURE = 1;
 
     private Date _date;
     private int _type;
     private String _value;
 
-    public Log createNewDinoLog(String value){
+    public static Log createNewDinoLog(String value){
         return new Log(TYPE_CREATION_DINOSAURE, value);
     }
-    public Log createNewGameLog(String value) {return  new Log(TYPE_CREATION_GAME, value);}
+    public static Log createNewGameLog(String value) {return  new Log(TYPE_CREATION_GAME, value);}
 
     private Log (int type, String value)
     {

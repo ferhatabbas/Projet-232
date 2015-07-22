@@ -13,13 +13,21 @@ public class Game {
     private ArrayList<Dinosaure> _dinos;
     private ArrayList<Log> _logs;
 
-    public Game(){
+    public Game() {
         _dinos = new ArrayList<Dinosaure>();
         _logs = new ArrayList<Log>();
     }
 
+    public void initialize(String username)
+    {
+        _userName = username;
+        _logs.add(Log.createNewGameLog(username));
+    }
+
+
     public void loadGameFromXml(String username)
     {
+        initialize(username);
         //TODO
     }
 
@@ -27,6 +35,7 @@ public class Game {
         Dinosaure d = new Dinosaure(name);
         try {
             addDino(d);
+            _logs.add(Log.createNewDinoLog(name));
         }catch (Exception e){
             return false;
         }
