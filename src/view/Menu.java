@@ -1,16 +1,21 @@
 package view;
 
-import controller.Game;
-import model.Dinosaure;
-
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import model.Dinosaure;
+import controller.Game;
 /**
  * 
  * @author carolenaka, sebastien and vahei
  *
  */
+
 public class Menu {
+	
+	private static String username;
+	
+	
 
 	public static Scanner _lecture = new Scanner(System.in);
 	public static Game _game;
@@ -34,7 +39,9 @@ public class Menu {
 			
 			switch(choix){
 				case 1 :
-					createNewGame();
+					System.out.println("Please enter your username : ");
+					username = _lecture.nextLine();
+					createNewGame(username);
 					break;
 				case 2 :
 					loadGame();
@@ -44,13 +51,18 @@ public class Menu {
 		_lecture.close();
 	}
 
-	private static void createNewGame() {
-		System.out.println("Please enter your username : ");
-		String username = _lecture.nextLine();
+	public static void createNewGame(String username) {
 		_game.initialize(username);
 		secondMenu();
 	}
 
+	public String getUsername(){
+		return username;
+	}
+	
+	
+	
+	
 	private static void loadGame() {
 		System.out.println("Please enter your username : ");
 		String username = _lecture.nextLine();
@@ -97,6 +109,8 @@ public class Menu {
 		}
 	}
 
+	
+	
 	private static void seeAllDinos() {
 		ArrayList<String> dinos = _game.getListOfDinos();
 		for(String d : dinos){
