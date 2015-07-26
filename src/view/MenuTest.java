@@ -5,6 +5,7 @@ import model.Dinosaure;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import controller.Game;
@@ -39,7 +40,7 @@ public class MenuTest {
 		assertEquals("ferhat",game.getUserName());	
 	}
 
-	@Test
+	@Ignore
 	public void loadGameTest() {
 		test.loadGame("Alexandre Landry");
 		//TODO	
