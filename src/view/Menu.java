@@ -14,8 +14,7 @@ import controller.Game;
 public class Menu {
 	
 	private static String username;
-	
-	
+	private static String name;
 
 	public static Scanner _lecture = new Scanner(System.in);
 	public static Game _game;
@@ -40,11 +39,11 @@ public class Menu {
 			switch(choix){
 				case 1 :
 					System.out.println("Please enter your username : ");
-					username = _lecture.nextLine();
 					createNewGame(username);
 					break;
 				case 2 :
-					loadGame();
+					System.out.println("Please enter your username : ");
+					loadGame(username);
 					break;
 			}
 		}while(choix != 3);
@@ -52,20 +51,13 @@ public class Menu {
 	}
 
 	public static void createNewGame(String username) {
+		username = _lecture.nextLine();
 		_game.initialize(username);
 		secondMenu();
 	}
-
-	public String getUsername(){
-		return username;
-	}
 	
-	
-	
-	
-	private static void loadGame() {
-		System.out.println("Please enter your username : ");
-		String username = _lecture.nextLine();
+	public static void loadGame(String username) {
+		username = _lecture.nextLine();
 		_game.loadGameFromXml(username);
 		secondMenu();
 	}
@@ -85,21 +77,22 @@ public class Menu {
 
 			switch(choix){
 				case 1 :
-					createNewDino();
+					System.out.println("Please enter the name of the dinosaur : ");
+					createNewDino(name);
 					break;
 				case 2 :
 					seeAllDinos();
 					break;
 				case 3 :
-					seeDino();
+					System.out.println("Please enter the name of the dinosaur : ");
+					seeDino(name);
 					break;
 			}
 		}while (choix != 4);
 	}
 
-	private static void createNewDino() {
-		System.out.println("Please enter the name of the dinosaur : ");
-		String name = _lecture.nextLine();
+	public static void createNewDino(String name) {
+		name = _lecture.nextLine();
 		if(_game.createDino(name))
 		{
 			System.out.println("Creation successfull");
@@ -118,9 +111,8 @@ public class Menu {
 		}
 	}
 
-	private static void seeDino() {
-		System.out.println("Please enter the name of the dinosaur : ");
-		String name = _lecture.nextLine();
+	public static void seeDino(String name) {
+		name = _lecture.nextLine();
 		Dinosaure d = _game.getDino(name);
 
 		if(d != null){
