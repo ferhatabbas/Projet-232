@@ -21,25 +21,21 @@ import java.util.Observable;
 /**
  * Created by ferhat on 18/07/2015.
  */
-public class Files extends Observable {
-    private boolean etat;
-
-    final DocumentBuilderFactory factory= DocumentBuilderFactory.newInstance();
+public class Files {
 
     /**
      * Created by ferhat on 18/07/2015.
      * methodes qui permet de recuperer une sauvegarde ou les donnees d'initialisation du jeux a partir d'un fichier XML
      */
 
-    public ArrayList<Dinosaure> readFiles(String XMLFILE) throws JDOMException, IOException {
+    public ArrayList<Dinosaure> readDinos(String userName) throws JDOMException, IOException {
         SAXBuilder saxBuilder = new SAXBuilder();
-        File xmlFile = new File(XMLFILE);
+        File xmlFile = new File(userName);
         Document document =saxBuilder.build(xmlFile);
         Element rootElem = document.getRootElement();
 
         ArrayList<Dinosaure> dinos = new ArrayList<Dinosaure>();
 
-        String user = rootElem.getChildText("username");
         List<Element> listelem = rootElem.getChild("dinosaures").getChildren();
 
         for(Element x : listelem){
@@ -59,29 +55,29 @@ public class Files extends Observable {
      * Created by ferhat on 18/07/2015.
      * methodes qui permet de sauvegarder le jeux dans un fichier XML
      */
-    public void writeFiles(String XMLFILE, ArrayList<Dinosaure> dino, Log log) throws IOException {
+    public void writeFile(String userName, ArrayList<Dinosaure> dinos) throws IOException {
      /* Création de tous les éléments */
         Element racine = new Element("savegame");
         Element user = new Element("username");
-        user.setText(log.get_user());
+        user.setText(userName);
         Element Dinos = new Element("dinosaures");
         racine.addContent(user);
         racine.addContent(Dinos);
 
-        for (int i = 0; i < dino.size(); i++) {
+        for (int i = 0; i < dinos.size(); i++) {
             Element Dino1 = new Element("dinosaure");
             Element name = new Element("name");
-            name.setText(dino.get(i).getName());
+            name.setText(dinos.get(i).getName());
             Element life = new Element("lifepoint");
-            life.setText(String.valueOf(dino.get(i).getLifePoint()));
+            life.setText(String.valueOf(dinos.get(i).getLifePoint()));
             Element strenght = new Element("strenght");
-            strenght.setText(String.valueOf(dino.get(i).getStrenght()));
+            strenght.setText(String.valueOf(dinos.get(i).getStrenght()));
             Element  speed = new Element("speed");
-            speed.setText(String.valueOf(dino.get(i).getSpeed()));
+            speed.setText(String.valueOf(dinos.get(i).getSpeed()));
             Element  defense = new Element("defense");
-            defense.setText(String.valueOf(dino.get(i).getDefense()));
+            defense.setText(String.valueOf(dinos.get(i).getDefense()));
             Element  xp = new Element("xp");
-            xp.setText(String.valueOf(dino.get(i).getXp()));
+            xp.setText(String.valueOf(dinos.get(i).getXp()));
             Dinos.addContent(Dino1);
             Dino1.addContent(name);
             Dino1.addContent(life);
@@ -95,11 +91,6 @@ public class Files extends Observable {
         Document document = new Document(racine);
         XMLOutputter sortie = new XMLOutputter(Format.getPrettyFormat());
 
-        sortie.output(document, new FileOutputStream(XMLFILE));
-    }
-    public void setEtat(boolean etat) {
-        this.etat = etat;
-        setChanged();
-        notifyObservers(this.etat);
+        sortie.output(document, new FileOutputStream(userName));
     }
 }

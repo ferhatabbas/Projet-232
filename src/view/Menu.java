@@ -53,13 +53,25 @@ public class Menu {
 	public static void createNewGame(String username) {
 		username = _lecture.nextLine();
 		_game.initialize(username);
-		secondMenu();
+		try
+		{
+			_game.save();
+			secondMenu();
+		}catch (Exception e)
+		{
+			System.out.println("Impossible de créer une nouvelle partie.");
+		}
 	}
 	
 	public static void loadGame(String username) {
 		username = _lecture.nextLine();
-		_game.loadGameFromXml(username);
-		secondMenu();
+		try {
+			_game.loadGameFromXml(username);
+			secondMenu();
+		}catch (Exception e)
+		{
+			System.out.println("Impossible de charger la partie.");
+		}
 	}
 
 	public static void secondMenu()
@@ -89,6 +101,14 @@ public class Menu {
 					break;
 			}
 		}while (choix != 4);
+
+		try
+		{
+			_game.save();
+		}catch (Exception e)
+		{
+			System.out.println("Impossible de sauvegarder la partie.");
+		}
 	}
 
 	public static void createNewDino(String name) {

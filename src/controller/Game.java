@@ -2,6 +2,9 @@ package controller;
 
 import model.Dinosaure;
 import model.Log;
+import org.jdom.JDOMException;
+
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -12,10 +15,12 @@ public class Game {
     private String _userName;
     private ArrayList<Dinosaure> _dinos;
     private ArrayList<Log> _logs;
+    private Files _gestionnaireFichier;
 
     public Game() {
         _dinos = new ArrayList<Dinosaure>();
         _logs = new ArrayList<Log>();
+        _gestionnaireFichier = new Files();
     }
 
     public void initialize(String username)
@@ -25,10 +30,15 @@ public class Game {
     }
 
 
-    public void loadGameFromXml(String username)
+    public void loadGameFromXml(String username) throws JDOMException, IOException
     {
-        initialize(username);
-        //TODO
+        _userName = username;
+        _dinos = _gestionnaireFichier.readDinos(username);
+    }
+
+    public void save() throws IOException
+    {
+        _gestionnaireFichier.writeFile(_userName, _dinos);
     }
 
     public boolean createDino(String name){

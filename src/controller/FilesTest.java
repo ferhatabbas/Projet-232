@@ -3,6 +3,7 @@ package controller;
 import model.Dinosaure;
 import model.Log;
 import org.jdom.JDOMException;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -22,27 +23,26 @@ import static org.junit.Assert.assertTrue;
 public class FilesTest {
 
     Files monFichier;
-    String XMLinit;
-    String XMLsave;
-    Log log;
-
-    @Rule
-    public final ExpectedException exception = ExpectedException.none();
+    String userName;
 
     @Before
     public void setup()
     {
         monFichier = new Files();
-        XMLinit="example.xml";
-        log=new Log(0,"2015-07-20 14:59:30.252","Alexandre");
-        XMLsave="save.xml";
-
-
+        userName = "Alex";
     }
+
+    @After
+    public void tearDown()
+    {
+        monFichier = null;
+        userName = null;
+    }
+
 
     @Test
     public void testInitDino() throws JAXBException, JDOMException, IOException, ParserConfigurationException, SAXException {
-        ArrayList<Dinosaure> dinos = monFichier.readFiles(XMLinit);
+        ArrayList<Dinosaure> dinos = monFichier.readDinos(userName);
         assertTrue(dinos.size() > 0);
     }
     @Test
@@ -51,10 +51,6 @@ public class FilesTest {
         Dino.add(new Dinosaure("rex"));
         Dino.add(new Dinosaure("bronto"));
         Dino.add(new Dinosaure("dilo"));
-        monFichier.writeFiles(XMLsave,Dino,log);
-
-
-
-
+        monFichier.writeFile(userName, Dino);
     }
 }
