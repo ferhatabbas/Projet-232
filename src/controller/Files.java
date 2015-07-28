@@ -41,7 +41,7 @@ public class Files {
     final String SINGLE_ATTACK = "attack";
     final String ATTACK_NAME = "name";
     final String ATTACK_TYPE = "type";
-    final String ATTACK_VALUE = value;
+    final String ATTACK_VALUE = "value";
 
     /**
      * Created by ferhat on 18/07/2015.
