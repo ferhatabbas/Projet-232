@@ -89,8 +89,7 @@ public class Menu {
 
 			switch(choix){
 				case 1 :
-					System.out.println("Please enter the name of the dinosaur : ");
-					createNewDino(name);
+					createNewDino();
 					break;
 				case 2 :
 					seeAllDinos();
@@ -111,9 +110,13 @@ public class Menu {
 		}
 	}
 
-	public static void createNewDino(String name) {
-		name = _lecture.nextLine();
-		if(_game.createDino(name))
+	public static void createNewDino() {
+		System.out.println("Please enter the name of the dinosaur : ");
+		String name = _lecture.nextLine();
+		System.out.println("Please enter the family of the dinosaur : ");
+		String family = _lecture.nextLine();
+
+		if(_game.createDino(name,family))
 		{
 			System.out.println("Creation successfull");
 		}else

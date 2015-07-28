@@ -162,7 +162,7 @@ public class TestClassDinausaure {
 	{
 		ArrayList<Attack> liste = new ArrayList<>();
 		argentavis.setAttackList(liste);
-		assertEquals(argentavis.AttackList,liste);
+		assertEquals(argentavis.attackList,liste);
 	}
 
     @Test
