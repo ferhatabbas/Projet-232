@@ -6,8 +6,11 @@ package model;
 public enum TypeAttack {
 
     Healttype,
-    Attacktype,
-    Defensetype,
+    Atacktype,
     Fleetype,
-    Improvetype
+    ImproveDefensetype,
+    ImproveStrenghttype,
+    ImproveSpeedtype
+
+
 }
