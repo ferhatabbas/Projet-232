@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Random;
 
-public abstract class Dinosaure extends Observable {
+public abstract class Dinosaure extends Observable implements AICpu{
 	protected boolean etat;
 	protected String name;
 	protected int lifePoint;
@@ -14,8 +14,11 @@ public abstract class Dinosaure extends Observable {
 	protected int xp;
 	protected TypeDinosaure type;
 	protected Family family;
-	protected ArrayList<Attack> attackList;
-	protected ArrayList<Feature> featureList;
+	protected ArrayList<DinoAction> AttackList;
+    protected ArrayList<Feature> featureList;
+
+    /* AI OVER HERE */
+    static int typeAlgo = 0;
 	
 	final int BASE_LIFEPOINT_DINO_MIN = 10;
 	final int BASE_LIFEPOINT_DINO_MAX = 16;
@@ -28,37 +31,38 @@ public abstract class Dinosaure extends Observable {
 	
 	public Dinosaure()
 	{
-		featureList = new ArrayList<Feature>();
-		attackList = new ArrayList<Attack>();
+		setFeatureList(null);
+		setName("DEFAULT: WAS GENERATED");
 		setLifePointRandom();
 		setStrenghtRandom();
 		setSpeedRandom();
 		setDefenseRandom();
 		setXp(0);
+        this.getTypeAlgo();
+
 	}
 	
 	public Dinosaure(String name, int lifePoint, int strenght, int speed, int defense, 
-			int xp, ArrayList<Attack> ListAttack)
+			int xp, ArrayList<DinoAction> ListAttack, ArrayList<Feature> ListFeature)
 	{
-		featureList = new ArrayList<Feature>();
-		attackList = new ArrayList<Attack>();
-		setName(name);
+        setFeatureList(null);
+        setName(name);
 		setLifePoint(lifePoint);
-		setStrenght(strenght);
-		setSpeed(speed);
-		setDefense(defense);
-		setXp(xp);
+        setStrenght(strenght);
+        setSpeed(speed);
+        setDefense(defense);
+        setXp(xp);
 		setAttackList(ListAttack);
 	}
 
 	void setDefenseRandom() 
-	{		
-		setDefense(Random(BASE_DEFENSE_POINT_DINO_MIN, BASE_DEFENSE_POINT_DINO_MAX));
+	{
+        setDefense(Random(BASE_DEFENSE_POINT_DINO_MIN, BASE_DEFENSE_POINT_DINO_MAX));
 	}
 
 	void setSpeedRandom() 
 	{
-		setSpeed(Random(BASE_SPEED_POINT_DINO_MIN, BASE_SPEED_POINT_DINO_MAX));
+        setSpeed(Random(BASE_SPEED_POINT_DINO_MIN, BASE_SPEED_POINT_DINO_MAX));
 	}
 
 	void setStrenghtRandom() 
@@ -146,6 +150,10 @@ public abstract class Dinosaure extends Observable {
 			defense = BASE_DEFENSE_POINT_DINO_MIN;
 		}
 	}
+
+    public boolean isEtat() {
+        return etat;
+    }
 	
 	public static int Random(int Low, int High){
 		Random r = new Random();
@@ -180,28 +188,28 @@ public abstract class Dinosaure extends Observable {
 		return featureList;
 	}
 
-	public void setFeatureList(ArrayList<Feature> featureList) {
-		this.featureList = featureList;
+	public void setFeatureList(ArrayList<Feature> newfeatureList) {
+		featureList = newfeatureList;
 	}
 
-	public void setAttackList(ArrayList<Attack> attackList) {
-		attackList = attackList;
+	public void setAttackList(ArrayList<DinoAction> attackList) {
+		AttackList = attackList;
 	}
 
-	public ArrayList<Attack> getAttackList() {
-		return attackList;
+	public ArrayList<DinoAction> getAttackList() {
+		return AttackList;
 	}
 
-	protected void addAttack(Attack attack){
-		attackList.add(attack);
+	protected void addAttack(DinoAction attack){
+		AttackList.add(attack);
 	}
 
-	protected void removeAttack(Attack attack){
-		attackList.remove(attack);
+	protected void removeAttack(DinoAction attack){
+		AttackList.remove(attack);
 	}
 
 	protected void removeAttack(int indexList){
-		attackList.remove(indexList);
+		AttackList.remove(indexList);
 	}
 	
 	public void printFeatureList() {
@@ -217,8 +225,63 @@ public abstract class Dinosaure extends Observable {
 			}
 		}
 	}
-	
+
+    /* IMPLEMENTATION DES METHODES DES INTERFACES*/
+    /* AICpu */
+
+    public int getTypeAlgo(){
+        return typeAlgo;
+    }
+
+    public void setTypeAlgo(int type){
+        typeAlgo = type;
+    }
+
+    public DinoAction GenerateAction() {
+
+        if(typeAlgo == TYPEALGOATTACK || typeAlgo == TYPEALGODEFENSE){
+            return GenerateSpecificAction();
+        }
+        else if (typeAlgo == TYPEALGORANDOM){
+            return GenerateRANDOMAction();
+        }
+        else{
+            return null; //ATENTION!!!
+        }
+    }
+
+    public DinoAction GenerateSpecificAction() {
+
+        TypeAction typeAction = getAttackType(typeAlgo);
+        for(int i = 0; i < AttackList.size(); i++){
+            if(AttackList.get(i).getActionAttack() == typeAction){
+                return AttackList.get(i);
+            }
+            else{
+                return AttackList.get(0);
+            }
+
+        }
+        return null; //ATENTION!!!
+    }
+
+    public DinoAction GenerateRANDOMAction() {
+        int value = Random(0, AttackList.size() - 1);
+        return AttackList.get(value);
+    }
+
+    public TypeAction getAttackType(int typeAlgo) {
+
+        switch (typeAlgo){
+            case TYPEALGOATTACK: return TypeAction.Atacktype;
+            case TYPEALGODEFENSE: return TypeAction.Fleetype;
+        }
+        return null;
+    }
+
 	public abstract void construct();
+
+    /* FIN AICpu */
 	
 	/*
 	public boolean equals(Object otherDinosaure)

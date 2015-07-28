@@ -160,16 +160,16 @@ public class TestClassDinausaure {
 	@Test
 	public void testAttackList()
 	{
-		ArrayList<Attack> liste = new ArrayList<>();
+		ArrayList<DinoAction> liste = new ArrayList<>();
 		argentavis.setAttackList(liste);
-		assertEquals(argentavis.attackList,liste);
+		assertEquals(argentavis.AttackList,liste);
 	}
 
     @Test
     public void testAttackListAddAndRemove()
     {
-        Attack attack = new Attack("tst", TypeAttack.Atacktype, 5);
-        ArrayList<Attack> liste = new ArrayList<>();
+        DinoAction attack = new DinoAction("tst", TypeAction.Atacktype, 5);
+        ArrayList<DinoAction> liste = new ArrayList<>();
         liste.add(attack);
         argentavis.addAttack(attack);
         assertEquals(argentavis.getAttackList(), liste);
@@ -185,8 +185,9 @@ public class TestClassDinausaure {
 		int Value = 5;
 		TypeDinosaure type = TypeDinosaure.Biped;
 		Family family = Family.Velocyraptor;
-		ArrayList<Attack> liste = new ArrayList<>();
-		Dinosaure dinosaure3 = DinoFactory.construct(name, Value, Value, Value,Value,Value, family, liste);
+		ArrayList<DinoAction> liste = new ArrayList<>();
+		ArrayList<Feature> liste2 = new ArrayList<>();
+		Dinosaure dinosaure3 = DinoFactory.construct(name, Value, Value, Value,Value,Value, family, liste, liste2);
 		assertEquals(dinosaure3.getDefense(),Value);		
 		assertEquals(dinosaure3.getLifePoint(),Value);	
 		assertEquals(dinosaure3.getName(),name);	

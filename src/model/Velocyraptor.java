@@ -2,10 +2,6 @@ package model;
 
 import java.util.ArrayList;
 
-/**
- * Created by Patricia Boutin and Pavlo Minko on 2015-07-22.
- */
-
 public class Velocyraptor extends Dinosaure {
 	
 	public Velocyraptor() {
@@ -16,8 +12,8 @@ public class Velocyraptor extends Dinosaure {
 	}
 	
 	public Velocyraptor(String name, int lifePoint, int strenght, 
-			int speed, int defense, int xp, ArrayList<Attack> ListeAttack) {
-		super(name, lifePoint, strenght, speed, defense, xp, ListeAttack);
+			int speed, int defense, int xp, ArrayList<DinoAction> ListeAttack, ArrayList<Feature> ListFeature) {
+		super(name, lifePoint, strenght, speed, defense, xp, ListeAttack, ListFeature);
 		setType(TypeDinosaure.Biped);
 		setFamily(Family.Velocyraptor);
 	}
@@ -27,9 +23,8 @@ public class Velocyraptor extends Dinosaure {
 		setSpeed(speed + 1);
 		setStrenght(strenght + 2);
 		
-		featureList.add(Feature.Faster);
+		featureList.add(Feature.Regenaration);
 		featureList.add(Feature.Learning);
-		featureList.add(Feature.Durability);
 	}
 
 }
