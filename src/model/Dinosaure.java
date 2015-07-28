@@ -14,7 +14,8 @@ public abstract class Dinosaure extends Observable {
 	protected int xp;
 	protected TypeDinosaure type;
 	protected Family family;
-	protected ArrayList<Attack> AttackList;
+	protected ArrayList<Attack> attackList;
+	protected ArrayList<Feature> featureList;
 	
 	final int BASE_LIFEPOINT_DINO_MIN = 10;
 	final int BASE_LIFEPOINT_DINO_MAX = 16;
@@ -28,6 +29,7 @@ public abstract class Dinosaure extends Observable {
 	public Dinosaure()
 	{
 		featureList = new ArrayList<Feature>();
+		attackList = new ArrayList<Attack>();
 		setLifePointRandom();
 		setStrenghtRandom();
 		setSpeedRandom();
@@ -39,6 +41,7 @@ public abstract class Dinosaure extends Observable {
 			int xp, ArrayList<Attack> ListAttack)
 	{
 		featureList = new ArrayList<Feature>();
+		attackList = new ArrayList<Attack>();
 		setName(name);
 		setLifePoint(lifePoint);
 		setStrenght(strenght);
@@ -182,25 +185,23 @@ public abstract class Dinosaure extends Observable {
 	}
 
 	public void setAttackList(ArrayList<Attack> attackList) {
-		AttackList = attackList;
+		attackList = attackList;
 	}
 
-	protected ArrayList<Feature> featureList;
-
 	public ArrayList<Attack> getAttackList() {
-		return AttackList;
+		return attackList;
 	}
 
 	protected void addAttack(Attack attack){
-		AttackList.add(attack);
+		attackList.add(attack);
 	}
 
 	protected void removeAttack(Attack attack){
-		AttackList.remove(attack);
+		attackList.remove(attack);
 	}
 
 	protected void removeAttack(int indexList){
-		AttackList.remove(indexList);
+		attackList.remove(indexList);
 	}
 	
 	public void printFeatureList() {

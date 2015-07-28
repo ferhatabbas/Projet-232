@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<savegame>
+  <username>Alex</username>
+  <dinosaures>
+    <dinosaure>
+      <name>Raptor</name>
+      <lifepoint>12</lifepoint>
+      <strenght>6</strenght>
+      <speed>7</speed>
+      <defense>6</defense>
+      <xp>0</xp>
+      <family>Velocyraptor</family>
+      <attacks />
+    </dinosaure>
+  </dinosaures>
+  <logs>
+    <log type="0" datetime="2015-07-28 01:00:37">Alex</log>
+    <log type="1" datetime="2015-07-28 01:00:57">Raptor</log>
+  </logs>
+</savegame>
+

@@ -1,8 +1,6 @@
 package controller;
 
-import model.Attack;
-import model.Dinosaure;
-import model.Log;
+import model.*;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
@@ -11,10 +9,13 @@ import org.jdom.output.Format;
 import org.jdom.output.XMLOutputter;
 
 import javax.xml.parsers.DocumentBuilderFactory;
+import java.awt.font.ShapeGraphicAttribute;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Observable;
 
@@ -22,7 +23,7 @@ import java.util.Observable;
 /**
  * Created by ferhat on 18/07/2015.
  */
-public class Files {
+public class Files extends Observer {
 
     final String SAVEGAME = "savegame";
     final String USER_NAME = "username";
@@ -42,49 +43,92 @@ public class Files {
     final String ATTACK_NAME = "name";
     final String ATTACK_TYPE = "type";
     final String ATTACK_VALUE = "value";
+    final String LOG_ATTRIBUTE_TYPE = "type";
+    final String LOG_ATTRIBUTE_DATETIME = "datetime";
 
     /**
      * Created by ferhat on 18/07/2015.
      * methodes qui permet de recuperer une sauvegarde ou les donnees d'initialisation du jeux a partir d'un fichier XML
      */
 
-    public ArrayList<Dinosaure> readDinos(String userName) throws JDOMException, IOException {
+    public void readFile(String userName) throws JDOMException, IOException {
+
+        Game game = (Game) get_subject();
+
         SAXBuilder saxBuilder = new SAXBuilder();
         File xmlFile = new File(userName);
         Document document =saxBuilder.build(xmlFile);
         Element rootElem = document.getRootElement();
 
+        /*USERNAME*/
+        String username = rootElem.getChildText(USER_NAME);
+
+        /*DINOS*/
         ArrayList<Dinosaure> dinos = new ArrayList<Dinosaure>();
 
-        List<Element> listelem = rootElem.getChild("dinosaures").getChildren();
+        List<Element> listDinos = rootElem.getChild(DINOSAURE_LIST).getChildren();
+        for(Element x : listDinos){
+            String name = x.getChildText(DINO_NAME);
+            Integer lifePoint = Integer.parseInt(x.getChildText(DINO_LIFE));
+            Integer strenght = Integer.parseInt(x.getChildText(DINO_STRENGHT));
+            Integer speed = Integer.parseInt(x.getChildText(DINO_SPEED));
+            Integer defense = Integer.parseInt(x.getChildText(DINO_DEFENSE));
+            Integer xp = Integer.parseInt(x.getChildText(DINO_XP));
+            Family family = Family.valueOf(x.getChildText(DINO_FAMILY));
 
-        for(Element x : listelem){
-            Dinosaure dino = new Dinosaure();
-            dino.setName(x.getChildText("name"));
-            dino.setLifePoint(Integer.parseInt(x.getChildText("lifepoint")));
-            dino.setStrenght(Integer.parseInt(x.getChildText("strenght")));
-            dino.setSpeed(Integer.parseInt(x.getChildText("speed")));
-            dino.setDefense(Integer.parseInt(x.getChildText("defense")));
-            dino.setXp(Integer.parseInt(x.getChildText("xp")));
-            dinos.add(dino);
+            ArrayList<Attack> attacks = new ArrayList<Attack>();
+            List<Element> listAttacks = x.getChild(ATTACK_LIST).getChildren();
+            for(Element y : listAttacks)
+            {
+                String aname = y.getChildText(ATTACK_NAME);
+                TypeAttack aType = TypeAttack.valueOf(y.getChildText(ATTACK_TYPE));
+                int aValue = Integer.parseInt(y.getChildText(ATTACK_VALUE));
+                attacks.add(new Attack(aname, aType, aValue));
+            }
+
+            dinos.add(DinoFactory.construct(name,lifePoint,strenght,speed,defense,xp,family,attacks));
         }
 
-        return dinos;
+        /*LOGS*/
+        ArrayList<Log> logs = new ArrayList<Log>();
+        List<Element> listLogs = rootElem.getChild(LOG_LIST).getChildren();
+        for(Element x : listLogs)
+        {
+            Log l = Log.createEmptyLog();
+            l.set_type(Integer.parseInt(x.getAttributeValue(LOG_ATTRIBUTE_TYPE)));
+            try {
+                l.set_date(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse(x.getAttributeValue(LOG_ATTRIBUTE_DATETIME)));
+            }catch (Exception e) {}
+            l.set_value(x.getValue());
+            logs.add(l);
+        }
+
+        /*ADD TO GAME*/
+        game.set_userName(userName);
+        game.set_dinos(dinos);
+        game.set_logs(logs);
     }
     /**
      * Created by ferhat on 18/07/2015.
      * methodes qui permet de sauvegarder le jeux dans un fichier XML
      */
-    public void writeFile(String userName, ArrayList<Dinosaure> dinos) throws IOException {
-     /* Création de tous les éléments */
+    public void update() {
+
+        Game game = (Game) get_subject();
+
+        /*RACINE*/
         Element racine = new Element(SAVEGAME);
+
+        /*USER_NAME*/
         Element user = new Element(USER_NAME);
-        user.setText(userName);
-        Element Dinos = new Element(DINOSAURE_LIST);
+        user.setText(game.get_userName());
         racine.addContent(user);
+
+        /*DINOSAURES*/
+        Element Dinos = new Element(DINOSAURE_LIST);
         racine.addContent(Dinos);
 
-        for (Dinosaure dino : dinos) {
+        for (Dinosaure dino : game.get_dinos()) {
             Element Dino1 = new Element(SINGLE_DINOSAURE);
             Element name = new Element(DINO_NAME);
             name.setText(dino.getName());
@@ -126,10 +170,28 @@ public class Files {
             Dino1.addContent(attacks);
         }
 
-		/* Enregistrment */
+        /*LOGS*/
+        Element Logs = new Element(LOG_LIST);
+        racine.addContent(Logs);
+
+        for(Log l : game.get_logs())
+        {
+            Element log = new Element(SINGLE_LOG);
+            log.setAttribute(LOG_ATTRIBUTE_TYPE, String.valueOf(l.get_type()));
+            log.setAttribute(LOG_ATTRIBUTE_DATETIME, new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(l.get_date()));
+            log.setText(l.get_value());
+            Logs.addContent(log);
+        }
+
+		/* Enregistrement */
         Document document = new Document(racine);
         XMLOutputter sortie = new XMLOutputter(Format.getPrettyFormat());
 
-        sortie.output(document, new FileOutputStream(userName));
+        try {
+            sortie.output(document, new FileOutputStream(game.get_userName()));
+        }catch (Exception e)
+        {
+
+        }
     }
 }

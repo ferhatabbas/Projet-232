@@ -2,6 +2,7 @@ package controller;
 
 import static org.junit.Assert.*;
 import model.Dinosaure;
+import model.Family;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -16,23 +17,24 @@ import java.util.ArrayList;
 public class GameTest {
 
     Game myGame;
+    final String USERNAME = "ALEX";
 
     @Before
     public void setup()
     {
         myGame = new Game();
-        myGame.setUserName("Alexandre");
+        myGame.initialize(USERNAME);
     }
 
     @Test
     public void testUsername(){
-        assertEquals(myGame.getUserName(), "Alexandre");
+        assertEquals(myGame.get_userName(), USERNAME);
     }
 
     @Test
     public void testAddDino()
     {
-        myGame.createDino("Rex");
+        myGame.createDino("Rex", "Tyranosaure");
 
         Dinosaure d = myGame.getDino("Rex");
         assertNotNull(d);
@@ -40,13 +42,13 @@ public class GameTest {
 
     @Test
     public void testAddMultipleDino() throws Exception {
-        assertTrue(myGame.createDino("Rex"));
-        assertFalse(myGame.createDino("Rex"));
+        assertTrue(myGame.createDino("Rex", "Tyranosaure"));
+        assertFalse(myGame.createDino("Rex", "Tyranosaure"));
     }
 
     @Test
     public void testListOfDinos(){
-        myGame.createDino("Rex");
+        myGame.createDino("Rex", "Tyranosaure");
 
         ArrayList<String> names = myGame.getListOfDinos();
         assertTrue(names.size() == 1);
