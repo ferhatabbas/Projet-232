@@ -168,7 +168,7 @@ public class TestClassDinausaure {
     @Test
     public void testAttackListAddAndRemove()
     {
-        Attack attack = new Attack("tst", TypeAttack.Attacktype, 5);
+        Attack attack = new Attack("tst", TypeAttack.Atacktype, 5);
         ArrayList<Attack> liste = new ArrayList<>();
         liste.add(attack);
         argentavis.addAttack(attack);
