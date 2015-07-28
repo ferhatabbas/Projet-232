@@ -2,6 +2,10 @@ package model;
 
 import java.util.ArrayList;
 
+/**
+ * Created by Patricia Boutin and Pavlo Minko on 2015-07-22.
+ */
+
 public class Velocyraptor extends Dinosaure {
 	
 	public Velocyraptor() {
@@ -23,8 +27,9 @@ public class Velocyraptor extends Dinosaure {
 		setSpeed(speed + 1);
 		setStrenght(strenght + 2);
 		
-		featureList.add(Feature.Regenaration);
+		featureList.add(Feature.Faster);
 		featureList.add(Feature.Learning);
+		featureList.add(Feature.Durability);
 	}
 
 }

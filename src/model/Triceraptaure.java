@@ -2,6 +2,10 @@ package model;
 
 import java.util.ArrayList;
 
+/**
+ * Created by Patricia Boutin and Pavlo Minko on 2015-07-22.
+ */
+
 public class Triceraptaure extends Dinosaure {
 
 	public Triceraptaure() {
@@ -25,7 +29,8 @@ public class Triceraptaure extends Dinosaure {
 		setDefense(defense + 1);
 		
 		featureList.add(Feature.Durability);
-		featureList.add(Feature.Regenaration);
+		featureList.add(Feature.Lovely);
+		featureList.add(Feature.Faster);
 	}
 
 }

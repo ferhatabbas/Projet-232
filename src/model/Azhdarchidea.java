@@ -2,6 +2,10 @@ package model;
 
 import java.util.ArrayList;
 
+/**
+ * Created by Patricia Boutin and Pavlo Minko on 2015-07-22.
+ */
+
 public class Azhdarchidea extends Dinosaure {
 
 	public Azhdarchidea() {
@@ -25,6 +29,7 @@ public class Azhdarchidea extends Dinosaure {
 		
 		featureList.add(Feature.Durability);
 		featureList.add(Feature.Learning);
+		featureList.add(Feature.Lovely);
 	}
 
 }

@@ -2,6 +2,10 @@ package model;
 
 import java.util.ArrayList;
 
+/**
+ * Created by Patricia Boutin and Pavlo Minko on 2015-07-22.
+ */
+
 public class Stegosorus extends Dinosaure {
 
 	public Stegosorus() {
@@ -24,8 +28,9 @@ public class Stegosorus extends Dinosaure {
 		setStrenght(strenght - 1);
 		setDefense(defense + 3);
 		
+		featureList.add(Feature.Stronger);
 		featureList.add(Feature.Durability);
-		featureList.add(Feature.Learning);
+		featureList.add(Feature.Regenaration);
 	}
 
 }
