@@ -20,6 +20,7 @@ public class Log {
         return new Log(TYPE_CREATION_DINOSAURE, value);
     }
     public static Log createNewGameLog(String value) {return  new Log(TYPE_CREATION_GAME, value);}
+    public static Log createEmptyLog(){return new Log(TYPE_CREATION_GAME, "");}
 
     private Log (int type, String value)
     {

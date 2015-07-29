@@ -86,7 +86,7 @@ public class Files extends Observer {
                 attacks.add(new Attack(aname, aType, aValue));
             }
 
-            dinos.add(DinoFactory.construct(name,lifePoint,strenght,speed,defense,xp,family,attacks));
+            dinos.add(DinoFactory.construct(name,lifePoint,strenght,speed,defense,xp,family,new ArrayList<DinoAction>(), new ArrayList<Feature>()));
         }
 
         /*LOGS*/
@@ -145,13 +145,13 @@ public class Files extends Observer {
             Element family = new Element(DINO_FAMILY);
             family.setText(String.valueOf(dino.getFamily()));
             Element attacks = new Element(ATTACK_LIST);
-            for(Attack _attack : dino.getAttackList())
+            for(DinoAction _attack : dino.getAttackList())
             {
                 Element attack = new Element(SINGLE_ATTACK);
                 Element attackName = new Element(ATTACK_NAME);
-                attackName.setText(_attack.getAttackName());
+                //attackName.setText(_attack.getAttackName());
                 Element attackType = new Element(ATTACK_TYPE);
-                attackType.setText(String.valueOf(_attack.getTypeAttack()));
+                //attackType.setText(String.valueOf(_attack.getTypeAttack()));
                 Element value = new Element(ATTACK_VALUE);
                 value.setText(String.valueOf(_attack.getValue()));
                 attacks.addContent(attack);
