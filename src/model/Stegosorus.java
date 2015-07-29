@@ -12,8 +12,8 @@ public class Stegosorus extends Dinosaure {
 	}
 	
 	public Stegosorus(String name, int lifePoint, int strenght, 
-			int speed, int defense, int xp, ArrayList<Attack> ListeAttack) {
-		super(name, lifePoint, strenght, speed, defense, xp, ListeAttack);
+			int speed, int defense, int xp, ArrayList<DinoAction> ListeAttack, ArrayList<Feature> ListFeature) {
+		super(name, lifePoint, strenght, speed, defense, xp, ListeAttack, ListFeature);
 		setType(TypeDinosaure.Quadriped);
 		setFamily(Family.Stegosorus);
 	}
