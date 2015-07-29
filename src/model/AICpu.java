@@ -1,8 +1,5 @@
 package model;
 
-import java.util.ArrayList;
-import java.util.Random;
-
 /**
  * Created by Philippe on 2015-07-28.
  */
@@ -23,6 +20,6 @@ public interface AICpu {
 
     public DinoAction GenerateRANDOMAction();
 
-    public TypeAction getAttackType(int typeAlgo);
+    public TypeAttack getAttackType(int typeAlgo);
 
 }

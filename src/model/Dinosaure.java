@@ -252,7 +252,7 @@ public abstract class Dinosaure extends Observable implements AICpu{
 
     public DinoAction GenerateSpecificAction() {
 
-        TypeAction typeAction = getAttackType(typeAlgo);
+        TypeAttack typeAction = getAttackType(typeAlgo);
         for(int i = 0; i < AttackList.size(); i++){
             if(AttackList.get(i).getActionAttack() == typeAction){
                 return AttackList.get(i);
@@ -270,11 +270,11 @@ public abstract class Dinosaure extends Observable implements AICpu{
         return AttackList.get(value);
     }
 
-    public TypeAction getAttackType(int typeAlgo) {
+    public TypeAttack getAttackType(int typeAlgo) {
 
         switch (typeAlgo){
-            case TYPEALGOATTACK: return TypeAction.Atacktype;
-            case TYPEALGODEFENSE: return TypeAction.Fleetype;
+            case TYPEALGOATTACK: return TypeAttack.Atacktype;
+            case TYPEALGODEFENSE: return TypeAttack.Fleetype;
         }
         return null;
     }

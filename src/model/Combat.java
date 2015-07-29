@@ -30,7 +30,8 @@ public class Combat {
         while (isNotfinish){
             if (userTurn){
                 for(int i = 0; i< UserDinolist.size()- 1; i++){
-                    chooseActionUser();
+                    Dinosaure dino = ComputerDinolist.get(i);
+                    chooseActionUser(dino);
                     isNotfinish = checkIfFinished();
                 }
                 userTurn = false;
@@ -110,7 +111,7 @@ public class Combat {
     public void chooseActionCpu(Dinosaure dino){
         dino.GenerateAction();
     }
-    public void chooseActionUser(){
+    public void chooseActionUser(Dinosaure dino){
 
     }
 

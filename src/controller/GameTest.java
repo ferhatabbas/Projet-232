@@ -1,15 +1,12 @@
 package controller;
 
-import static org.junit.Assert.*;
 import model.Dinosaure;
-import model.Family;
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
-import sun.reflect.annotation.ExceptionProxy;
 
 import java.util.ArrayList;
+
+import static org.junit.Assert.*;
 
 /**
  * Created by Alexandre on 2015-07-18.

@@ -124,8 +124,6 @@ public class Menu {
 			System.out.println("Creation failed");
 		}
 	}
-
-	
 	
 	private static void seeAllDinos() {
 		ArrayList<String> dinos = _game.getListOfDinos();
