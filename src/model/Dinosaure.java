@@ -14,8 +14,8 @@ public abstract class Dinosaure extends Observable implements AICpu{
 	protected int xp;
 	protected TypeDinosaure type;
 	protected Family family;
-	protected ArrayList<DinoAction> AttackList;
-    protected ArrayList<Feature> featureList;
+	protected ArrayList<DinoAction> AttackList = new ArrayList<DinoAction>();
+    protected ArrayList<Feature> featureList = new ArrayList<Feature>();
 
     /* AI OVER HERE */
     static int typeAlgo = 0;
@@ -31,7 +31,6 @@ public abstract class Dinosaure extends Observable implements AICpu{
 	
 	public Dinosaure()
 	{
-		setFeatureList(null);
 		setName("DEFAULT: WAS GENERATED");
 		setLifePointRandom();
 		setStrenghtRandom();
@@ -45,7 +44,7 @@ public abstract class Dinosaure extends Observable implements AICpu{
 	public Dinosaure(String name, int lifePoint, int strenght, int speed, int defense, 
 			int xp, ArrayList<DinoAction> ListAttack, ArrayList<Feature> ListFeature)
 	{
-        setFeatureList(null);
+        setFeatureList(ListFeature);
         setName(name);
 		setLifePoint(lifePoint);
         setStrenght(strenght);
@@ -252,7 +251,7 @@ public abstract class Dinosaure extends Observable implements AICpu{
 
     public DinoAction GenerateSpecificAction() {
 
-        TypeAttack typeAction = getAttackType(typeAlgo);
+		TypeAction typeAction = getActionType(getTypeAlgo());
         for(int i = 0; i < AttackList.size(); i++){
             if(AttackList.get(i).getActionAttack() == typeAction){
                 return AttackList.get(i);
@@ -270,11 +269,11 @@ public abstract class Dinosaure extends Observable implements AICpu{
         return AttackList.get(value);
     }
 
-    public TypeAttack getAttackType(int typeAlgo) {
+    public TypeAction getActionType(int typeAlgo) {
 
         switch (typeAlgo){
-            case TYPEALGOATTACK: return TypeAttack.Atacktype;
-            case TYPEALGODEFENSE: return TypeAttack.Fleetype;
+            case TYPEALGOATTACK: return TypeAction.Atacktype;
+            case TYPEALGODEFENSE: return TypeAction.Fleetype;
         }
         return null;
     }

@@ -81,7 +81,7 @@ public class Files extends Observer {
             for(Element y : listActions)
             {
                 String aname = y.getChildText(ATTACK_NAME);
-                TypeAttack aType = TypeAttack.valueOf(y.getChildText(ATTACK_TYPE));
+                TypeAction aType = TypeAction.valueOf(y.getChildText(ATTACK_TYPE));
                 int aValue = Integer.parseInt(y.getChildText(ATTACK_VALUE));
                 attacks.add(new DinoAction(aname, aType, aValue));
             }

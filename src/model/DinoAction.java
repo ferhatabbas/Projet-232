@@ -6,10 +6,10 @@ package model;
 public class DinoAction {
 
     String attackName;
-    TypeAttack typeAttack;
+    TypeAction typeAttack;
     int value;
 
-    public DinoAction(String name, TypeAttack typeAttack, int value){
+    public DinoAction(String name, TypeAction typeAttack, int value){
         setActionName(name);
         setActionAttack(typeAttack);
         setValue(value);
@@ -19,7 +19,7 @@ public class DinoAction {
         return attackName;
     }
 
-    public TypeAttack getActionAttack() {
+    public TypeAction getActionAttack() {
         return typeAttack;
     }
 
@@ -31,7 +31,7 @@ public class DinoAction {
         this.attackName = attackName;
     }
 
-    public void setActionAttack(TypeAttack typeAttack) {
+    public void setActionAttack(TypeAction typeAttack) {
         this.typeAttack = typeAttack;
     }
 

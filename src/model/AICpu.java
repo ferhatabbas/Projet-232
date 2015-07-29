@@ -20,6 +20,6 @@ public interface AICpu {
 
     public DinoAction GenerateRANDOMAction();
 
-    public TypeAttack getAttackType(int typeAlgo);
+    public TypeAction getActionType(int typeAlgo);
 
 }
