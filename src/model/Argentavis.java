@@ -2,10 +2,6 @@ package model;
 
 import java.util.ArrayList;
 
-/**
- * Created by Patricia Boutin and Pavlo Minko on 2015-07-22.
- */
-
 public class Argentavis extends Dinosaure {
 
 	public Argentavis() {
@@ -16,8 +12,8 @@ public class Argentavis extends Dinosaure {
 	}
 	
 	public Argentavis(String name, int lifePoint, int strenght, 
-			int speed, int defense, int xp, ArrayList<Attack> ListeAttack) {
-		super(name, lifePoint, strenght, speed, defense, xp, ListeAttack);
+			int speed, int defense, int xp, ArrayList<DinoAction> ListeAttack, ArrayList<Feature> ListFeature) {
+		super(name, lifePoint, strenght, speed, defense, xp, ListeAttack, ListFeature);
 		setType(TypeDinosaure.Sailor);
 		setFamily(Family.Argentavis);
 	}
@@ -30,7 +26,6 @@ public class Argentavis extends Dinosaure {
 		
 		featureList.add(Feature.Regenaration);
 		featureList.add(Feature.Learning);
-		featureList.add(Feature.Stronger);
 	}
 
 }

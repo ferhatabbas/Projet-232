@@ -2,10 +2,6 @@ package model;
 
 import java.util.ArrayList;
 
-/**
- * Created by Patricia Boutin and Pavlo Minko on 2015-07-22.
- */
-
 public class Stegosorus extends Dinosaure {
 
 	public Stegosorus() {
@@ -16,8 +12,8 @@ public class Stegosorus extends Dinosaure {
 	}
 	
 	public Stegosorus(String name, int lifePoint, int strenght, 
-			int speed, int defense, int xp, ArrayList<Attack> ListeAttack) {
-		super(name, lifePoint, strenght, speed, defense, xp, ListeAttack);
+			int speed, int defense, int xp, ArrayList<DinoAction> ListeAttack, ArrayList<Feature> ListFeature) {
+		super(name, lifePoint, strenght, speed, defense, xp, ListeAttack, ListFeature);
 		setType(TypeDinosaure.Quadriped);
 		setFamily(Family.Stegosorus);
 	}
@@ -28,9 +24,8 @@ public class Stegosorus extends Dinosaure {
 		setStrenght(strenght - 1);
 		setDefense(defense + 3);
 		
-		featureList.add(Feature.Stronger);
 		featureList.add(Feature.Durability);
-		featureList.add(Feature.Regenaration);
+		featureList.add(Feature.Learning);
 	}
 
 }

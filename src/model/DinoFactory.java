@@ -26,27 +26,27 @@ public class DinoFactory {
 	}
 
 	public static Dinosaure construct(String name, int lifePoint, int strenght, 
-			int speed, int defense, int xp, Family family, ArrayList<Attack> ListeAttack ) {
+			int speed, int defense, int xp, Family family, ArrayList<DinoAction> ListeAttack,  ArrayList<Feature> ListFeature) {
 		Dinosaure newDino = null;
 		
 		switch (family) {
 		case Velocyraptor : newDino = new Velocyraptor(name, lifePoint, strenght, 
-				speed, defense, xp, ListeAttack);
+				speed, defense, xp, ListeAttack, ListFeature);
 			break;
 		case Tyranosaure : newDino = new Tyranosaure(name, lifePoint, strenght, 
-				speed, defense, xp, ListeAttack);
+				speed, defense, xp, ListeAttack, ListFeature);
 			break;
 		case Stegosorus : newDino = new Stegosorus(name, lifePoint, strenght, 
-				speed, defense, xp, ListeAttack);
+				speed, defense, xp, ListeAttack, ListFeature);
 			break;
 		case Triceraptaure : newDino = new Triceraptaure(name, lifePoint, strenght, 
-				speed, defense, xp, ListeAttack);
+				speed, defense, xp, ListeAttack, ListFeature);
 			break;
 		case Azhdarchidea : newDino = new Azhdarchidea(name, lifePoint, strenght, 
-				speed, defense, xp, ListeAttack);
+				speed, defense, xp, ListeAttack, ListFeature);
 			break;
 		case Argentavis : newDino = new Argentavis(name, lifePoint, strenght, 
-				speed, defense, xp, ListeAttack);
+				speed, defense, xp, ListeAttack, ListFeature);
 			break;
 			default:;
 		}
