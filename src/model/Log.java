@@ -14,6 +14,8 @@ public class Log {
     private int _type;
     private String _value;
 
+    //create logs
+
     public static Log createNewDinoLog(String value){
         return new Log(TYPE_CREATION_DINOSAURE, value);
     }
