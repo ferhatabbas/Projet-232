@@ -76,14 +76,14 @@ public class Files extends Observer {
             Integer xp = Integer.parseInt(x.getChildText(DINO_XP));
             Family family = Family.valueOf(x.getChildText(DINO_FAMILY));
 
-            ArrayList<Attack> attacks = new ArrayList<Attack>();
+            ArrayList<DinoAction> attacks = new ArrayList<DinoAction>();
             List<Element> listAttacks = x.getChild(ATTACK_LIST).getChildren();
             for(Element y : listAttacks)
             {
                 String aname = y.getChildText(ATTACK_NAME);
-                TypeAttack aType = TypeAttack.valueOf(y.getChildText(ATTACK_TYPE));
+                TypeAction aType = TypeAction.valueOf(y.getChildText(ATTACK_TYPE));
                 int aValue = Integer.parseInt(y.getChildText(ATTACK_VALUE));
-                attacks.add(new Attack(aname, aType, aValue));
+                attacks.add(new DinoAction(aname, aType, aValue));
             }
 
             dinos.add(DinoFactory.construct(name,lifePoint,strenght,speed,defense,xp,family,new ArrayList<DinoAction>(), new ArrayList<Feature>()));
@@ -149,9 +149,9 @@ public class Files extends Observer {
             {
                 Element attack = new Element(SINGLE_ATTACK);
                 Element attackName = new Element(ATTACK_NAME);
-                //attackName.setText(_attack.getAttackName());
+                attackName.setText(_attack.getActionName());
                 Element attackType = new Element(ATTACK_TYPE);
-                //attackType.setText(String.valueOf(_attack.getTypeAttack()));
+                attackType.setText(String.valueOf(_attack.getActionAttack()));
                 Element value = new Element(ATTACK_VALUE);
                 value.setText(String.valueOf(_attack.getValue()));
                 attacks.addContent(attack);
