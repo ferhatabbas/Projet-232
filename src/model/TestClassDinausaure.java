@@ -160,7 +160,7 @@ public class TestClassDinausaure {
 	@Test
 	public void testAttackList()
 	{
-		ArrayList<DinoAction> liste = new ArrayList<>();
+		ArrayList<DinoAction> liste = new ArrayList<DinoAction>();
 		argentavis.setActionList(liste);
 		assertEquals(argentavis.actionList,liste);
 	}
@@ -169,10 +169,13 @@ public class TestClassDinausaure {
     public void testAttackListAddAndRemove()
     {
         DinoAction attack = new DinoAction("tst", TypeAction.Atacktype, 5);
-        ArrayList<DinoAction> liste = new ArrayList<>();
+        ArrayList<DinoAction> liste = new ArrayList<DinoAction>();
+		argentavis.setActionList(liste);
+
         liste.add(attack);
         argentavis.addAttack(attack);
         assertEquals(argentavis.getActionList(), liste);
+
         liste.remove(attack);
         argentavis.removeAttack(attack);
         assertEquals(argentavis.getActionList(), liste);
@@ -189,18 +192,25 @@ public class TestClassDinausaure {
 		ArrayList<Feature> liste2 = new ArrayList<>();
 		Dinosaure dinosaure3 = DinoFactory.construct(name, Value, Value, Value,Value,Value, family, liste, liste2);
 		assertEquals(dinosaure3.getDefense(),Value);		
-		assertEquals(dinosaure3.getLifePoint(),Value);	
-		assertEquals(dinosaure3.getName(),name);	
-		assertEquals(dinosaure3.getSpeed(),Value);
+		assertEquals(dinosaure3.getLifePoint(), Value);
+		assertEquals(dinosaure3.getName(), name);
+		assertEquals(dinosaure3.getSpeed(), Value);
 		assertEquals(dinosaure3.getStrenght(),Value);
-		assertEquals(dinosaure3.getXp(),Value);
-		assertEquals(dinosaure3.getType(),type);
+		assertEquals(dinosaure3.getXp(), Value);
+		assertEquals(dinosaure3.getType(), type);
 		assertEquals(dinosaure3.getFamily(),family);
 		
 	}
-	
-	
-	
 
+	@Test
+	public void testDinoActionList() {
+		assertEquals(velocyraptor.getActionList(), DinoActionList.getList());
+	}
 
+    @Test
+    public void testGetAction() {
+        DinoAction action = new DinoAction("Small_Punch", TypeAction.Atacktype, 5);
+        velocyraptor.addAttack(action);
+        assertEquals(velocyraptor.getAttack("Small_Punch"), action);
+    }
 }

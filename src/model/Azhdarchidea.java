@@ -8,7 +8,13 @@ public class Azhdarchidea extends Dinosaure {
 		super();
 		setType(TypeDinosaure.Flying);
 		setFamily(Family.Azhdarchidea);
-		construct();
+
+		// Specialisation du Dinosaure
+		setStrenght(strenght + 2);
+		setDefense(defense - 1);
+
+		featureList.add(Feature.Durability);
+		featureList.add(Feature.Learning);
 	}
 	
 	public Azhdarchidea(String name, int lifePoint, int strenght, 
@@ -16,15 +22,6 @@ public class Azhdarchidea extends Dinosaure {
 		super(name, lifePoint, strenght, speed, defense, xp, ListeAttack, ListFeature);
 		setType(TypeDinosaure.Flying);
 		setFamily(Family.Azhdarchidea);
-	}
-	
-	@Override
-	public void construct() {
-		setStrenght(strenght + 2);
-		setDefense(defense - 1);
-		
-		featureList.add(Feature.Durability);
-		featureList.add(Feature.Learning);
 	}
 
 }

@@ -8,7 +8,13 @@ public class Velocyraptor extends Dinosaure {
 		super();
 		setType(TypeDinosaure.Biped);
 		setFamily(Family.Velocyraptor);
-		construct();
+
+		// Specialisation du Dinosaure
+		setSpeed(speed + 1);
+		setStrenght(strenght + 2);
+
+		featureList.add(Feature.Regenaration);
+		featureList.add(Feature.Learning);
 	}
 	
 	public Velocyraptor(String name, int lifePoint, int strenght, 
@@ -17,14 +23,4 @@ public class Velocyraptor extends Dinosaure {
 		setType(TypeDinosaure.Biped);
 		setFamily(Family.Velocyraptor);
 	}
-	
-	@Override
-	public void construct() {
-		setSpeed(speed + 1);
-		setStrenght(strenght + 2);
-		
-		featureList.add(Feature.Regenaration);
-		featureList.add(Feature.Learning);
-	}
-
 }

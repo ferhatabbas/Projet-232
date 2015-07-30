@@ -8,7 +8,13 @@ public class Tyranosaure extends Dinosaure {
 		super();
 		setType(TypeDinosaure.Biped);
 		setFamily(Family.Tyranosaure);
-		construct();
+
+		// Specialisation du Dinosaure
+		setSpeed(speed + 2);
+		setStrenght(strenght + 2);
+		setDefense(defense + 2);
+
+		featureList.add(Feature.Learning);
 	}
 	
 	public Tyranosaure(String name, int lifePoint, int strenght, 
@@ -17,14 +23,4 @@ public class Tyranosaure extends Dinosaure {
 		setType(TypeDinosaure.Biped);
 		setFamily(Family.Tyranosaure);
 	}
-	
-	@Override
-	public void construct() {
-		setSpeed(speed + 2);
-		setStrenght(strenght + 2);
-		setDefense(defense + 2);
-		
-		featureList.add(Feature.Learning);
-	}
-
 }

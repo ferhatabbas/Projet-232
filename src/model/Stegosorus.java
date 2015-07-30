@@ -8,7 +8,14 @@ public class Stegosorus extends Dinosaure {
 		super();
 		setType(TypeDinosaure.Quadriped);
 		setFamily(Family.Stegosorus);
-		construct();
+
+		// Specialisation du Dinosaure
+		setSpeed(speed - 4);
+		setStrenght(strenght - 1);
+		setDefense(defense + 3);
+
+		featureList.add(Feature.Durability);
+		featureList.add(Feature.Learning);
 	}
 	
 	public Stegosorus(String name, int lifePoint, int strenght, 
@@ -17,15 +24,4 @@ public class Stegosorus extends Dinosaure {
 		setType(TypeDinosaure.Quadriped);
 		setFamily(Family.Stegosorus);
 	}
-	
-	@Override
-	public void construct() {
-		setSpeed(speed - 4);
-		setStrenght(strenght - 1);
-		setDefense(defense + 3);
-		
-		featureList.add(Feature.Durability);
-		featureList.add(Feature.Learning);
-	}
-
 }

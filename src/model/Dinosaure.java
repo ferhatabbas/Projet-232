@@ -38,7 +38,7 @@ public abstract class Dinosaure extends Observable implements AICpu{
 		setDefenseRandom();
 		setXp(0);
         this.getTypeAlgo();
-
+		setActionList(DinoActionList.getList());
 	}
 	
 	public Dinosaure(String name, int lifePoint, int strenght, int speed, int defense, 
@@ -207,6 +207,16 @@ public abstract class Dinosaure extends Observable implements AICpu{
 		actionList.remove(attack);
 	}
 
+	protected DinoAction getAttack(String attackName) {
+		int index = 0;
+		for(int i = 0; i < actionList.size(); i++) {
+			if(actionList.get(i).getActionName() == attackName) {
+				index = i;
+			}
+		}
+		return actionList.get(index);
+	}
+
 	protected void removeAttack(int indexList){
 		actionList.remove(indexList);
 	}
@@ -277,8 +287,6 @@ public abstract class Dinosaure extends Observable implements AICpu{
         }
         return null;
     }
-
-	public abstract void construct();
 
     /* FIN AICpu */
 	

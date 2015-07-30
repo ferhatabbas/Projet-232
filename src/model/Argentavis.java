@@ -8,7 +8,14 @@ public class Argentavis extends Dinosaure {
 		super();
 		setType(TypeDinosaure.Sailor);
 		setFamily(Family.Argentavis);
-		construct();
+
+		// Specialisation du Dinosaure
+		setSpeed(speed + 1);
+		setStrenght(strenght - 2);
+		setDefense(defense - 2);
+
+		featureList.add(Feature.Regenaration);
+		featureList.add(Feature.Learning);
 	}
 	
 	public Argentavis(String name, int lifePoint, int strenght, 
@@ -16,16 +23,6 @@ public class Argentavis extends Dinosaure {
 		super(name, lifePoint, strenght, speed, defense, xp, ListeAttack, ListFeature);
 		setType(TypeDinosaure.Sailor);
 		setFamily(Family.Argentavis);
-	}
-	
-	@Override
-	public void construct() {
-		setSpeed(speed + 1);
-		setStrenght(strenght - 2);
-		setDefense(defense - 2);
-		
-		featureList.add(Feature.Regenaration);
-		featureList.add(Feature.Learning);
 	}
 
 }
