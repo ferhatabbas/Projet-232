@@ -38,19 +38,18 @@ public class Menu {
 			
 			switch(choix){
 				case 1 :
-					System.out.println("Please enter your username : ");
-					createNewGame(username);
+					createNewGame();
 					break;
 				case 2 :
-					System.out.println("Please enter your username : ");
-					loadGame(username);
+					loadGame();
 					break;
 			}
 		}while(choix != 3);
 		_lecture.close();
 	}
 
-	public static void createNewGame(String username) {
+	public static void createNewGame() {
+		System.out.println("Please enter your username : ");
 		username = _lecture.nextLine();
 		_game.initialize(username);
 		try
@@ -63,7 +62,8 @@ public class Menu {
 		}
 	}
 	
-	public static void loadGame(String username) {
+	public static void loadGame() {
+		System.out.println("Please enter your username : ");
 		username = _lecture.nextLine();
 		try {
 			_game.loadGameFromXml(username);
@@ -95,8 +95,7 @@ public class Menu {
 					seeAllDinos();
 					break;
 				case 3 :
-					System.out.println("Please enter the name of the dinosaur : ");
-					seeDino(name);
+					seeDino();
 					break;
 			}
 		}while (choix != 4);
@@ -125,14 +124,15 @@ public class Menu {
 		}
 	}
 	
-	private static void seeAllDinos() {
+	public static void seeAllDinos() {
 		ArrayList<String> dinos = _game.getListOfDinos();
 		for(String d : dinos){
 			System.out.println("Dinosaure : " + d);
 		}
 	}
 
-	public static void seeDino(String name) {
+	public static void seeDino() {
+		System.out.println("Please enter the name of the dinosaur : ");
 		name = _lecture.nextLine();
 		Dinosaure d = _game.getDino(name);
 
@@ -143,7 +143,7 @@ public class Menu {
 		}
 	}
 
-	private static void ShowDino(Dinosaure d) {
+	public static void ShowDino(Dinosaure d) {
 		System.out.println("Name : " + d.getName());
 		System.out.println("Lifepoint : " + d.getLifePoint());
 		System.out.println("Strength : " + d.getStrenght());
@@ -151,4 +151,24 @@ public class Menu {
 		System.out.println("Defense : " + d.getDefense());
 		System.out.println("XP : " + d.getXp());
 	}
+
+	public static void StartCombat(Boolean userTurn){
+		System.out.println("Combat Starting!:");
+		WhoHaveTurn(userTurn);
+
+	}
+
+	public static void WhoHaveTurn(Boolean userTurn){
+		System.out.println("Determining Who Start First!");
+		if(userTurn){
+			System.out.println("User Turn! :");
+		}
+		else {
+			System.out.println("Cpu Turn! :");
+		}
+	}
+
+
+
+
 }
