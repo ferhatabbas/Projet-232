@@ -11,7 +11,7 @@ public class DinoAction {
 
     public DinoAction(String name, TypeAction typeAttack, int value){
         setActionName(name);
-        setActionAttack(typeAttack);
+        setTypeAction(typeAttack);
         setValue(value);
     }
 
@@ -19,7 +19,7 @@ public class DinoAction {
         return attackName;
     }
 
-    public TypeAction getActionAttack() {
+    public TypeAction getTypeAction() {
         return typeAttack;
     }
 
@@ -31,7 +31,7 @@ public class DinoAction {
         this.attackName = attackName;
     }
 
-    public void setActionAttack(TypeAction typeAttack) {
+    public void setTypeAction(TypeAction typeAttack) {
         this.typeAttack = typeAttack;
     }
 

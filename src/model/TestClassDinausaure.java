@@ -161,8 +161,8 @@ public class TestClassDinausaure {
 	public void testAttackList()
 	{
 		ArrayList<DinoAction> liste = new ArrayList<>();
-		argentavis.setAttackList(liste);
-		assertEquals(argentavis.AttackList,liste);
+		argentavis.setActionList(liste);
+		assertEquals(argentavis.actionList,liste);
 	}
 
     @Test
@@ -172,10 +172,10 @@ public class TestClassDinausaure {
         ArrayList<DinoAction> liste = new ArrayList<>();
         liste.add(attack);
         argentavis.addAttack(attack);
-        assertEquals(argentavis.getAttackList(), liste);
+        assertEquals(argentavis.getActionList(), liste);
         liste.remove(attack);
         argentavis.removeAttack(attack);
-        assertEquals(argentavis.getAttackList(), liste);
+        assertEquals(argentavis.getActionList(), liste);
     }
 	
 	@Test

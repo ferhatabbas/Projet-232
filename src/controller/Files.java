@@ -8,16 +8,12 @@ import org.jdom.input.SAXBuilder;
 import org.jdom.output.Format;
 import org.jdom.output.XMLOutputter;
 
-import javax.xml.parsers.DocumentBuilderFactory;
-import java.awt.font.ShapeGraphicAttribute;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Observable;
 
 
 /**
@@ -156,13 +152,13 @@ public class Files extends Observer {
             Element family = new Element(DINO_FAMILY);
             family.setText(String.valueOf(dino.getFamily()));
             Element attacks = new Element(ATTACK_LIST);
-            for(DinoAction _attack : dino.getAttackList())
+            for(DinoAction _attack : dino.getActionList())
             {
                 Element attack = new Element(SINGLE_ATTACK);
                 Element attackName = new Element(ATTACK_NAME);
                 attackName.setText(_attack.getActionName());
                 Element attackType = new Element(ATTACK_TYPE);
-                attackType.setText(String.valueOf(_attack.getActionAttack()));
+                attackType.setText(String.valueOf(_attack.getTypeAction()));
                 Element value = new Element(ATTACK_VALUE);
                 value.setText(String.valueOf(_attack.getValue()));
                 attacks.addContent(attack);

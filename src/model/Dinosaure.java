@@ -14,7 +14,7 @@ public abstract class Dinosaure extends Observable implements AICpu{
 	protected int xp;
 	protected TypeDinosaure type;
 	protected Family family;
-	protected ArrayList<DinoAction> AttackList = new ArrayList<DinoAction>();
+	protected ArrayList<DinoAction> actionList = new ArrayList<DinoAction>();
     protected ArrayList<Feature> featureList = new ArrayList<Feature>();
 
     /* AI OVER HERE */
@@ -51,7 +51,7 @@ public abstract class Dinosaure extends Observable implements AICpu{
         setSpeed(speed);
         setDefense(defense);
         setXp(xp);
-		setAttackList(ListAttack);
+		setActionList(ListAttack);
 	}
 
 	void setDefenseRandom() 
@@ -191,24 +191,24 @@ public abstract class Dinosaure extends Observable implements AICpu{
 		featureList = newfeatureList;
 	}
 
-	public void setAttackList(ArrayList<DinoAction> attackList) {
-		AttackList = attackList;
+	public void setActionList(ArrayList<DinoAction> actionList) {
+		this.actionList = actionList;
 	}
 
-	public ArrayList<DinoAction> getAttackList() {
-		return AttackList;
+	public ArrayList<DinoAction> getActionList() {
+		return actionList;
 	}
 
 	protected void addAttack(DinoAction attack){
-		AttackList.add(attack);
+		actionList.add(attack);
 	}
 
 	protected void removeAttack(DinoAction attack){
-		AttackList.remove(attack);
+		actionList.remove(attack);
 	}
 
 	protected void removeAttack(int indexList){
-		AttackList.remove(indexList);
+		actionList.remove(indexList);
 	}
 	
 	public void printFeatureList() {
@@ -252,12 +252,12 @@ public abstract class Dinosaure extends Observable implements AICpu{
     public DinoAction GenerateSpecificAction() {
 
 		TypeAction typeAction = getActionType(getTypeAlgo());
-        for(int i = 0; i < AttackList.size(); i++){
-            if(AttackList.get(i).getActionAttack() == typeAction){
-                return AttackList.get(i);
+        for(int i = 0; i < actionList.size(); i++){
+            if(actionList.get(i).getTypeAction() == typeAction){
+                return actionList.get(i);
             }
             else{
-                return AttackList.get(0);
+                return actionList.get(0);
             }
 
         }
@@ -265,8 +265,8 @@ public abstract class Dinosaure extends Observable implements AICpu{
     }
 
     public DinoAction GenerateRANDOMAction() {
-        int value = Random(0, AttackList.size() - 1);
-        return AttackList.get(value);
+        int value = Random(0, actionList.size() - 1);
+        return actionList.get(value);
     }
 
     public TypeAction getActionType(int typeAlgo) {
