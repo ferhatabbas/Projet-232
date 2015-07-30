@@ -8,7 +8,14 @@ public class Triceraptaure extends Dinosaure {
 		super();
 		setType(TypeDinosaure.Quadriped);
 		setFamily(Family.Triceraptaure);
-		construct();
+
+		// Specialisation du Dinosaure
+		setSpeed(speed - 2);
+		setStrenght(strenght + 2);
+		setDefense(defense + 1);
+
+		featureList.add(Feature.Durability);
+		featureList.add(Feature.Regenaration);
 	}
 	
 	public Triceraptaure(String name, int lifePoint, int strenght, 
@@ -17,15 +24,4 @@ public class Triceraptaure extends Dinosaure {
 		setType(TypeDinosaure.Quadriped);
 		setFamily(Family.Triceraptaure);
 	}
-	
-	@Override
-	public void construct() {
-		setSpeed(speed - 2);
-		setStrenght(strenght + 2);
-		setDefense(defense + 1);
-		
-		featureList.add(Feature.Durability);
-		featureList.add(Feature.Regenaration);
-	}
-
 }

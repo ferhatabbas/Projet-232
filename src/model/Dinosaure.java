@@ -207,6 +207,17 @@ public abstract class Dinosaure extends Observable implements AICpu{
 		AttackList.remove(attack);
 	}
 
+	protected DinoAction getDinoAction(String attackName) {
+		int index = -1;
+		for(int i = 0; i < AttackList.size(); i++) {
+			if(AttackList.get(i).getActionName() == attackName) {
+				index = i;
+				break;
+			}
+		}
+		return AttackList.get(index);
+	}
+
 	protected void removeAttack(int indexList){
 		AttackList.remove(indexList);
 	}
@@ -277,8 +288,6 @@ public abstract class Dinosaure extends Observable implements AICpu{
         }
         return null;
     }
-
-	public abstract void construct();
 
     /* FIN AICpu */
 	
