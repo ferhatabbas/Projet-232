@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Random;
 
 /**
@@ -152,13 +153,29 @@ public class Combat {
     }
 
     public void chooseActionCpu(Dinosaure dino){
-       DinoAction action = dino.GenerateAction();
+        boolean userSide = false;
+        DinoAction action = dino.GenerateAction();
+        if (action == null){return;} //ERROR
+        Dinosaure target = GenerateTarget();
+        if (target == null){return;} //ERROR
+        ApplyAction(action, target, userSide);
+    }
+
+    public Dinosaure GenerateTarget(){
+        ArrayList<Dinosaure> list = getUserDinolist();
+        for(int i = 0; i < getUserDinolist().size() -1 ; i++){
+            if(getUserDinolist().get(i) != null){
+                return getUserDinolist().get(i);
+            }
+        }
+        return null; //ERROR
     }
 
     public void chooseActionUser(Dinosaure dino){
         boolean userSide = true;
         //DinoAction actionChosen = ChooseActionDino(dino.getActionList());
         //Dinosaure target = ChooseTarget(actionChosen);
+        //if (target == null){return;} //ERROR
         //ApplyAction(actionChosen, target, userSide);
     }
 

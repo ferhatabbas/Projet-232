@@ -151,4 +151,24 @@ public class Menu {
 		System.out.println("Defense : " + d.getDefense());
 		System.out.println("XP : " + d.getXp());
 	}
+
+	private static void StartCombat(Boolean userTurn){
+		System.out.println("Combat Starting!:");
+		WhoHaveTurn(userTurn);
+
+	}
+
+	private static void WhoHaveTurn(Boolean userTurn){
+		System.out.println("Determining Who Start First!");
+		if(userTurn){
+			System.out.println("User Turn! :");
+		}
+		else {
+			System.out.println("Cpu Turn! :");
+		}
+	}
+
+
+
+
 }
