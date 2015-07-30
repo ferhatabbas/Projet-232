@@ -1,4 +1,8 @@
-package model;
+package controller;
+
+import model.DinoAction;
+import model.Dinosaure;
+import model.TypeAction;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -12,16 +16,14 @@ public class Combat {
     protected ArrayList<Dinosaure> InitialUserDinolist;
     protected ArrayList<Dinosaure> UserDinolist;
     protected ArrayList<Dinosaure> ComputerDinolist;
-    protected ArrayList<Dinosaure> userGraveyard;
-    protected ArrayList<Dinosaure> computerGraveyard;
 
     protected boolean MatchResult; //User side
     protected boolean UserTurn;
 
     public Combat(ArrayList<Dinosaure> listeDinoUser, ArrayList<Dinosaure> listeDino){
-
         initCombat(listeDinoUser, listeDino);
         setUserTurn(isUserturn());
+        //view.Menu.StartCombat(UserTurn);
         MatchResult = StartCombat(UserTurn);
     }
 
@@ -30,8 +32,9 @@ public class Combat {
         boolean isNotfinish = true;
         boolean userIsWinner;
         while (isNotfinish){
-
+            //view.Menu.WhoHaveTurn(UserTurn);
             if (userTurn){
+                //view.Menu.ShowCombatStatus(getUserDinolist(), getComputerDinolist());
                 for(int i = 0; i< UserDinolist.size()- 1; i++){
                     Dinosaure dino = ComputerDinolist.get(i);
                     chooseActionUser(dino);
@@ -74,22 +77,6 @@ public class Combat {
 
     public void setInitialUserDinolist(ArrayList<Dinosaure> initialUserDinolist) {
         InitialUserDinolist = initialUserDinolist;
-    }
-
-    public ArrayList<Dinosaure> getUserGraveyard() {
-        return userGraveyard;
-    }
-
-    public void setUserGraveyard(ArrayList<Dinosaure> userGraveyard) {
-        this.userGraveyard = userGraveyard;
-    }
-
-    public ArrayList<Dinosaure> getComputerGraveyard() {
-        return computerGraveyard;
-    }
-
-    public void setComputerGraveyard(ArrayList<Dinosaure> computerGraveyard) {
-        this.computerGraveyard = computerGraveyard;
     }
 
     public boolean getMatchResult() {
@@ -161,6 +148,15 @@ public class Combat {
         ApplyAction(action, target, userSide);
     }
 
+    public void chooseActionUser(Dinosaure dino){
+        boolean userSide = true;
+        //DinoAction actionChosen = ChooseActionDino(dino);
+        //Dinosaure target = ChooseTarget(actionChosen);
+        //if (target == null){return;} //ERROR
+        //ApplyAction(actionChosen, target, userSide);
+        //view.Menu.ShowDamageInflicted();
+    }
+
     public Dinosaure GenerateTarget(){
         ArrayList<Dinosaure> list = getUserDinolist();
         for(int i = 0; i < getUserDinolist().size() -1 ; i++){
@@ -170,15 +166,17 @@ public class Combat {
         }
         return null; //ERROR
     }
-
-    public void chooseActionUser(Dinosaure dino){
-        boolean userSide = true;
-        //DinoAction actionChosen = ChooseActionDino(dino.getActionList());
-        //Dinosaure target = ChooseTarget(actionChosen);
-        //if (target == null){return;} //ERROR
-        //ApplyAction(actionChosen, target, userSide);
+    /*
+    public DinoAction ChooseAction(Dinosaure dino){
+        //DinoAction actionChosen;
+        //return  actionChosen = view.Menu.ChooseAction(dino.getActionList());
     }
 
+    public Dinosaure ChooseTarget(){
+        //Dinosaure target;
+        //return  target = view.Menu.ChooseTarget(getComputerDinolist());
+    }
+    */
     public void ApplyAction(DinoAction action, Dinosaure target, Boolean userSide){
         TypeAction type = action.getTypeAction();
 
@@ -199,17 +197,18 @@ public class Combat {
             //NOT ENOUGH STRONG
             return;
         }
-
+        int previousLifePoint = target.getLifePoint();
         target.setLifePoint(target.getLifePoint() + valueAplied);
         boolean isTargetAlive = isPositive(target.getLifePoint());
-
+        int ActualLifePoint = target.getLifePoint();
         if(userSide){
             if (isTargetAlive){
                 AdjustDinolist(getComputerDinolist(), target);
                 return;
             }
             else {
-                AdjustGraveyardlist(getComputerDinolist(), target, userSide);
+                target.setLifePoint(0);
+                AdjustDinolist(getComputerDinolist(), target);
                 return;
             }
         }
@@ -219,14 +218,18 @@ public class Combat {
                 return;
             }
             else {
-                AdjustGraveyardlist(getUserDinolist(), target, userSide);
+                target.setLifePoint(0);
+                AdjustDinolist(getUserDinolist(), target);
                 return;
             }
         }
+        //view.Menu.ShowChangeInflicted(target, previousLifePoint, ActualLifePoint);
     }
 
     public void ApplyDefenseAction(DinoAction action, Dinosaure target, boolean userSide){
+        int previousDefense = target.getDefense();
         target.setDefense(target.getDefense() + action.getValue());
+        int ActualDefense = target.getDefense();
         if (userSide){
             AdjustDinolist(getUserDinolist(), target);
             return;
@@ -235,6 +238,7 @@ public class Combat {
             AdjustDinolist(getComputerDinolist(), target);
             return;
         }
+        //view.Menu.ShowChangeInflicted(target, previousLifePoint, ActualLifePoint);
     }
 
     public void ApplyFleeAction(DinoAction action, Dinosaure target, boolean userSide){
@@ -261,10 +265,13 @@ public class Combat {
                 return;
             }
         }
+        //view.Menu.FleeAttempt(tryFlee, target, userSide);
     }
 
     public void ApplyHealthAction(DinoAction action, Dinosaure target, boolean userSide){
+        int previousHealth = target.getSpeed();
         target.setLifePoint(target.getSpeed() + action.getValue());
+        int actualHealth = target.getSpeed();
         if (userSide){
             AdjustDinolist(getUserDinolist(), target);
             return;
@@ -273,10 +280,13 @@ public class Combat {
             AdjustDinolist(getComputerDinolist(), target);
             return;
         }
+        //view.Menu.ShowChangeInflicted(target, previousHealth, actualHealth)
     }
 
     public void ApplySpeedAction(DinoAction action, Dinosaure target, boolean userSide){
+        int previousSpeed = target.getSpeed();
         target.setSpeed(target.getSpeed() + action.getValue());
+        int actualSpeed = target.getSpeed();
         if (userSide){
             AdjustDinolist(getUserDinolist(), target);
             return;
@@ -285,10 +295,13 @@ public class Combat {
             AdjustDinolist(getComputerDinolist(), target);
             return;
         }
+        //view.Menu.ShowChangeInflicted(target, previousSpeed, actualSpeed)
     }
 
     public void ApplyStrenghtAction(DinoAction action, Dinosaure target, boolean userSide){
+        int previousStrenght = target.getStrenght();
         target.setStrenght(target.getSpeed() + action.getValue());
+        int actualStrenght = target.getStrenght();
         if (userSide){
             AdjustDinolist(getUserDinolist(), target);
             return;
@@ -306,18 +319,6 @@ public class Combat {
 
     }
 
-    public void AdjustGraveyardlist(ArrayList<Dinosaure> targetList, Dinosaure dino, boolean isUserSide){
-        if (isUserSide){
-            int index = getComputerDinolist().indexOf(dino);
-            targetList.remove(index);
-            getComputerGraveyard().add(index, dino);
-        }
-        else{
-            int index = getUserDinolist().indexOf(dino);
-            targetList.remove(index);
-            getUserGraveyard().add(index, dino);
-        }
-    }
 
     public boolean isPositive(int value){
         if (value >= 0){
