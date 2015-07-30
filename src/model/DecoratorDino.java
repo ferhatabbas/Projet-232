@@ -10,8 +10,7 @@ public abstract class DecoratorDino extends Dinosaure {
         this.decoratedDino = decoratedDino;
     }
 
-    public abstract void construct();
-    public abstract DinoAction amelioreAction(DinoAction action);
+    public abstract DinoAction improveAction(DinoAction action);
 
 
 }

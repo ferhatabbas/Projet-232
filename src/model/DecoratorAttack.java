@@ -10,11 +10,8 @@ public class DecoratorAttack extends DecoratorDino {
 
     }
 
-    public void construct() {
+    public DinoAction improveAction(DinoAction action) {
 
-    }
-
-    public DinoAction amelioreAction(DinoAction action) {
         return null;
     }
 }

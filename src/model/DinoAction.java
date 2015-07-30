@@ -38,4 +38,20 @@ public class DinoAction {
     public void setValue(int value) {
         this.value = value;
     }
+
+    public boolean equals(Object otherAction)
+    {
+        if (otherAction instanceof DinoAction)
+        {
+            DinoAction action = (DinoAction) otherAction;
+            return
+                    attackName == action.getActionName() &&
+                            typeAttack == action.getTypeAction() &&
+                            value == action.getValue();
+        }
+        else
+        {
+            return false;
+        }
+    }
 }
