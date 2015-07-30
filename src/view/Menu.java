@@ -3,7 +3,9 @@ package view;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import model.DinoAction;
 import model.Dinosaure;
+import controller.Combat;
 import controller.Game;
 /**
  * 
@@ -18,6 +20,7 @@ public class Menu {
 
 	public static Scanner _lecture = new Scanner(System.in);
 	public static Game _game;
+	public static Combat combat;
 
 	public static void main(String[] args) {
 
@@ -170,5 +173,43 @@ public class Menu {
 
 
 
-
+	public static void ShowCombatStatus(ArrayList<Dinosaure> UserDinolist, ArrayList<Dinosaure> ComputerDinolist){
+		
+		for(int i=0; i< UserDinolist.size();i++){
+			System.out.println("Name : " + UserDinolist.get(i).getName());
+			System.out.println("Strenght : " + UserDinolist.get(i).getStrenght());
+			System.out.println("Speed : " + UserDinolist.get(i).getSpeed());
+			System.out.println("Defense : " + UserDinolist.get(i).getDefense());
+		}
+		
+		for(int j=0; j< ComputerDinolist.size();j++){
+			System.out.println("Name : " + ComputerDinolist.get(j).getName());
+			System.out.println("Strenght : " + ComputerDinolist.get(j).getStrenght());
+			System.out.println("Speed : " + ComputerDinolist.get(j).getSpeed());
+			System.out.println("Defense : " + ComputerDinolist.get(j).getDefense());
+		}
 }
+	
+	public static void ShowDamageInflicted(){
+		ArrayList<Dinosaure> UserDinolist = new ArrayList<Dinosaure> ();
+		ArrayList<Dinosaure> ComputerDinolist = new ArrayList<Dinosaure> ();
+		if(combat.getUserTurn()){
+			for(int i=0; i< ComputerDinolist.size();i++){
+				System.out.println("LifePoint : " + ComputerDinolist.get(i).getLifePoint());
+				System.out.println("Xp : " + ComputerDinolist.get(i).getXp());
+		}
+		}
+		else {
+				for(int i=0; i< UserDinolist.size();i++){
+					System.out.println("LifePoint : " + UserDinolist.get(i).getLifePoint());
+					System.out.println("Xp : " + UserDinolist.get(i).getXp());
+				
+			}
+				
+	}
+	}
+	public static void ChooseAction(ArrayList<DinoAction> ActionList){
+		
+	}
+	
+	}	
