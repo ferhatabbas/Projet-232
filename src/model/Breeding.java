@@ -19,7 +19,7 @@ public class Breeding {
 
 		return newDino;
 	}
-	
+
 	private static Family choiceFamily(Dinosaure dino1, Dinosaure dino2) {
 		if(Dinosaure.Random(1,2) == 1) {
 			return dino1.getFamily();

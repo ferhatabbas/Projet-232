@@ -7,7 +7,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- * Created by Patricia Boutin on 28 juil. 2015.
+ * Created by Patricia Boutin and Pavlo Minko on 29 juil. 2015.
  */
 
 public class BreedingTest {
@@ -42,12 +42,18 @@ public class BreedingTest {
 
     @Test
     public void testBreedingFamily() {
+        System.out.println("Family : newDino = " + newDino.getFamily().toString());
+
         assertTrue(newDino.getFamily() == stegosorus.getFamily()
                 || newDino.getFamily() == velocyraptor.getFamily());
     }
 
     @Test
     public void testBreedingType() {
+        System.out.println("Type : newDino = " + newDino.getType().toString()
+                + ", stegosorus = " + stegosorus.getType().toString()
+                + ", velocyraptor = " + velocyraptor.getType().toString());
+
         assertTrue(newDino.getType() == stegosorus.getType()
                 || newDino.getType() == velocyraptor.getType());
     }
@@ -58,6 +64,7 @@ public class BreedingTest {
         System.out.println("Defense : newDino = " + newDino.getDefense()
                 + ", stegosorus = " + stegosorus.getDefense()
                 + ", velocyraptor = " + velocyraptor.getDefense());
+
         if(stegosorus.getDefense() <= velocyraptor.getDefense()) {
             assertTrue(newDino.getDefense() >= stegosorus.getDefense()
                     && newDino.getDefense() <= velocyraptor.getDefense());
@@ -73,6 +80,7 @@ public class BreedingTest {
         System.out.println("Speed : newDino = " + newDino.getSpeed()
                 + ", stegosorus = " + stegosorus.getSpeed()
                 + ", velocyraptor = " + velocyraptor.getSpeed());
+
         if(stegosorus.getSpeed() <= velocyraptor.getSpeed()) {
             assertTrue(newDino.getSpeed() >= stegosorus.getSpeed()
                     && newDino.getSpeed() <= velocyraptor.getSpeed());
@@ -88,6 +96,7 @@ public class BreedingTest {
         System.out.println("Strength : newDino = " + newDino.getStrenght()
                 + ", stegosorus = " + stegosorus.getStrenght()
                 + ", velocyraptor = " + velocyraptor.getStrenght());
+
         if(stegosorus.getStrenght() <= velocyraptor.getStrenght()) {
             assertTrue(newDino.getStrenght() >= stegosorus.getStrenght()
                     && newDino.getStrenght() <= velocyraptor.getStrenght());
@@ -103,6 +112,7 @@ public class BreedingTest {
         System.out.println("LifePoint : newDino = " + newDino.getLifePoint()
                 + ", stegosorus = " + stegosorus.getLifePoint()
                 + ", velocyraptor = " + velocyraptor.getLifePoint());
+
         if(stegosorus.getLifePoint() <= velocyraptor.getLifePoint()) {
             assertTrue(newDino.getLifePoint() >= stegosorus.getLifePoint()
                     && newDino.getLifePoint() <= velocyraptor.getLifePoint());
