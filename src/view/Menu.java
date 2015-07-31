@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import model.DinoAction;
+import model.DinoActionList;
 import model.Dinosaure;
 import controller.Combat;
 import controller.Game;
@@ -24,7 +25,7 @@ public class Menu {
 
 	public static void main(String[] args) {
 
-		int choix;
+		int choice;
 
 		System.out.println("***  WELCOME TO DINOGAME ! ***");
 		do{
@@ -34,12 +35,12 @@ public class Menu {
 			System.out.println("3 : to quit");
 	
 			System.out.println("Enter a number to choose");
-			choix = _lecture.nextInt();
+			choice = _lecture.nextInt();
 			_lecture.nextLine();
 
 			_game = new Game();
 			
-			switch(choix){
+			switch(choice){
 				case 1 :
 					createNewGame();
 					break;
@@ -47,7 +48,7 @@ public class Menu {
 					loadGame();
 					break;
 			}
-		}while(choix != 3);
+		}while(choice != 3);
 		_lecture.close();
 	}
 
@@ -173,43 +174,81 @@ public class Menu {
 
 
 
-	public static void ShowCombatStatus(ArrayList<Dinosaure> UserDinolist, ArrayList<Dinosaure> ComputerDinolist){
+	public static void ShowCombatStatus(ArrayList<Dinosaure> userDinolist, ArrayList<Dinosaure> computerDinolist){
 		
-		for(int i=0; i< UserDinolist.size();i++){
-			System.out.println("Name : " + UserDinolist.get(i).getName());
-			System.out.println("Strenght : " + UserDinolist.get(i).getStrenght());
-			System.out.println("Speed : " + UserDinolist.get(i).getSpeed());
-			System.out.println("Defense : " + UserDinolist.get(i).getDefense());
+		for(int i=0; i< userDinolist.size();i++){
+			System.out.println("Name : " + userDinolist.get(i).getName());
+			System.out.println("Strenght : " + userDinolist.get(i).getStrenght());
+			System.out.println("Speed : " + userDinolist.get(i).getSpeed());
+			System.out.println("Defense : " + userDinolist.get(i).getDefense());
 		}
 		
-		for(int j=0; j< ComputerDinolist.size();j++){
-			System.out.println("Name : " + ComputerDinolist.get(j).getName());
-			System.out.println("Strenght : " + ComputerDinolist.get(j).getStrenght());
-			System.out.println("Speed : " + ComputerDinolist.get(j).getSpeed());
-			System.out.println("Defense : " + ComputerDinolist.get(j).getDefense());
+		for(int j=0; j< computerDinolist.size();j++){
+			System.out.println("Name : " + computerDinolist.get(j).getName());
+			System.out.println("Strenght : " + computerDinolist.get(j).getStrenght());
+			System.out.println("Speed : " + computerDinolist.get(j).getSpeed());
+			System.out.println("Defense : " + computerDinolist.get(j).getDefense());
 		}
 }
 	
 	public static void ShowDamageInflicted(){
-		ArrayList<Dinosaure> UserDinolist = new ArrayList<Dinosaure> ();
-		ArrayList<Dinosaure> ComputerDinolist = new ArrayList<Dinosaure> ();
+		ArrayList<Dinosaure> userDinolist = new ArrayList<Dinosaure> ();
+		ArrayList<Dinosaure> computerDinolist = new ArrayList<Dinosaure> ();
 		if(combat.getUserTurn()){
-			for(int i=0; i< ComputerDinolist.size();i++){
-				System.out.println("LifePoint : " + ComputerDinolist.get(i).getLifePoint());
-				System.out.println("Xp : " + ComputerDinolist.get(i).getXp());
+			for(int i=0; i< computerDinolist.size();i++){
+				System.out.println("LifePoint : " + computerDinolist.get(i).getLifePoint());
+				System.out.println("Xp : " + computerDinolist.get(i).getXp());
 		}
 		}
 		else {
-				for(int i=0; i< UserDinolist.size();i++){
-					System.out.println("LifePoint : " + UserDinolist.get(i).getLifePoint());
-					System.out.println("Xp : " + UserDinolist.get(i).getXp());
+				for(int i=0; i< userDinolist.size();i++){
+					System.out.println("LifePoint : " + userDinolist.get(i).getLifePoint());
+					System.out.println("Xp : " + userDinolist.get(i).getXp());
 				
 			}
 				
 	}
 	}
-	public static void ChooseAction(ArrayList<DinoAction> ActionList){
+	public static DinoAction ChooseAction(ArrayList<DinoAction> actionList){
+		DinoAction action = null;
+		int chooseAttack;
+		
+		System.out.println("Choose the number of your attack: ");
+		for(int i=0; i< actionList.size(); i++){
+			System.out.println(i + "- "+ actionList.get(i).getActionName());
+			
+		}
+		chooseAttack = _lecture.nextInt();
+		_lecture.nextLine();
+		_lecture.close();
+	
+		action = actionList.get(chooseAttack);
+		
+		return action;
+	}	
+	
+	public Dinosaure ChooseTarget(ArrayList<Dinosaure> computerDinolist){
+		int chooseTarget;
+		
+		System.out.println("Choose a number for your target: ");
+		for(int i=0; i< computerDinolist.size(); i++){
+			System.out.println(i + "- "+ computerDinolist.get(i).getName());
+			
+		}
+		chooseTarget = _lecture.nextInt();
+		_lecture.nextLine();
+		_lecture.close();
+		Dinosaure target =  computerDinolist.get(chooseTarget);
+		
+		return target;
+	}
+	
+	public static void ShowChangeInflicted(Dinosaure target,int previousLifePoint, int actualLifePoint){
+		System.out.println("target: "+ target.getName());
+		System.out.println("previousLifePoint: "+ previousLifePoint);
+		System.out.println("actualLifePoint: "+ actualLifePoint);
 		
 	}
 	
-	}	
+	
+}
