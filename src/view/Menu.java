@@ -3,8 +3,8 @@ package view;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import model.Breeding;
 import model.DinoAction;
-import model.DinoActionList;
 import model.Dinosaure;
 import controller.Combat;
 import controller.Game;
@@ -74,24 +74,26 @@ public class Menu {
 			secondMenu();
 		}catch (Exception e)
 		{
-			System.out.println("Impossible de charger la partie.");
+			System.out.println("Impossible to load the game.");
 		}
 	}
 
 	public static void secondMenu()
 	{
-		int choix;
+		int choice;
 		do {
 			System.out.println("Enter");
 			System.out.println("1 : to create a dinosaur");
 			System.out.println("2 : to see all dinosaurs");
 			System.out.println("3 : to see a dinosaur");
-			System.out.println("4 : to quit");
+			System.out.println("4 : to breed dinosaurs");
+			System.out.println("5 : to start a combat");
+			System.out.println("6 : to quit");
 
-			choix = _lecture.nextInt();
+			choice = _lecture.nextInt();
 			_lecture.nextLine();
 
-			switch(choix){
+			switch(choice){
 				case 1 :
 					createNewDino();
 					break;
@@ -101,16 +103,53 @@ public class Menu {
 				case 3 :
 					seeDino();
 					break;
+				case 4 :
+					breedDino();
+					break;
+				case 5 :
+					combat();
+					break;
 			}
-		}while (choix != 4);
+		}while (choice != 6);
 
 		try
 		{
 			_game.save();
 		}catch (Exception e)
 		{
-			System.out.println("Impossible de sauvegarder la partie.");
+			System.out.println("Impossible to save the game");
 		}
+	}
+
+
+	private static void combat() {
+		CombatScriptController
+		
+	}
+
+	public static void breedDino() {
+		String babyDinoName;
+		int choice1,choice2;
+		
+		System.out.println("Choose the numbers for the first and second dinosaur: ");
+		for(int i=0; i< combat.getUserDinolist().size(); i++){
+			System.out.println(i + "- "+ combat.getUserDinolist().get(i).getName());
+			
+		}
+		choice1 = _lecture.nextInt();
+		_lecture.nextLine();
+		Dinosaure dino1 = combat.getUserDinolist().get(choice1);
+		choice2 = _lecture.nextInt();
+		_lecture.nextLine();
+		Dinosaure dino2 = combat.getUserDinolist().get(choice2);
+		
+
+		System.out.println("Choose a name for the baby dinosaur: ");
+	    babyDinoName = _lecture.next();
+		_lecture.nextLine();
+		_lecture.close();
+		
+		combat.getUserDinolist().add( Breeding.newBreeding(dino1, dino2, babyDinoName));
 	}
 
 	public static void createNewDino() {
@@ -156,7 +195,7 @@ public class Menu {
 		System.out.println("XP : " + d.getXp());
 	}
 
-	public static void StartCombat(Boolean userTurn){
+	public static void startCombat(Boolean userTurn){
 		System.out.println("Combat Starting!:");
 		WhoHaveTurn(userTurn);
 
@@ -165,10 +204,10 @@ public class Menu {
 	public static void WhoHaveTurn(Boolean userTurn){
 		System.out.println("Determining Who Start First!");
 		if(userTurn){
-			System.out.println("User Turn! :");
+			System.out.println("User Turn! ");
 		}
 		else {
-			System.out.println("Cpu Turn! :");
+			System.out.println("Cpu Turn! ");
 		}
 	}
 
@@ -192,25 +231,24 @@ public class Menu {
 }
 	
 	public static void ShowDamageInflicted(){
-		ArrayList<Dinosaure> userDinolist = new ArrayList<Dinosaure> ();
-		ArrayList<Dinosaure> computerDinolist = new ArrayList<Dinosaure> ();
+	
 		if(combat.getUserTurn()){
-			for(int i=0; i< computerDinolist.size();i++){
-				System.out.println("LifePoint : " + computerDinolist.get(i).getLifePoint());
-				System.out.println("Xp : " + computerDinolist.get(i).getXp());
+			for(int i=0; i< combat.getComputerDinolist().size();i++){
+				System.out.println("LifePoint : " + combat.getComputerDinolist().get(i).getLifePoint());
+				System.out.println("Xp : " + combat.getComputerDinolist().get(i).getXp());
 		}
 		}
 		else {
-				for(int i=0; i< userDinolist.size();i++){
-					System.out.println("LifePoint : " + userDinolist.get(i).getLifePoint());
-					System.out.println("Xp : " + userDinolist.get(i).getXp());
+				for(int i=0; i< combat.getUserDinolist().size();i++){
+					System.out.println("LifePoint : " + combat.getUserDinolist().get(i).getLifePoint());
+					System.out.println("Xp : " + combat.getUserDinolist().get(i).getXp());
 				
 			}
 				
 	}
 	}
 	public static DinoAction ChooseAction(ArrayList<DinoAction> actionList){
-		DinoAction action = null;
+
 		int chooseAttack;
 		
 		System.out.println("Choose the number of your attack: ");
@@ -222,9 +260,8 @@ public class Menu {
 		_lecture.nextLine();
 		_lecture.close();
 	
-		action = actionList.get(chooseAttack);
 		
-		return action;
+		return actionList.get(chooseAttack);
 	}	
 	
 	public Dinosaure ChooseTarget(ArrayList<Dinosaure> computerDinolist){
@@ -238,9 +275,8 @@ public class Menu {
 		chooseTarget = _lecture.nextInt();
 		_lecture.nextLine();
 		_lecture.close();
-		Dinosaure target =  computerDinolist.get(chooseTarget);
 		
-		return target;
+		return computerDinolist.get(chooseTarget);
 	}
 	
 	public static void ShowChangeInflicted(Dinosaure target,int previousLifePoint, int actualLifePoint){
@@ -250,5 +286,20 @@ public class Menu {
 		
 	}
 	
+	public static void FleeAttempt(boolean tryFlee, Dinosaure target, boolean userSide){
+		
+		if(tryFlee == true){
+			if(userSide == true){
+				System.out.println("Your dinosaur flew... ");
+			}
+			else{
+				System.out.println(target.getName() +"flew... ");
+			}
+		}
+		else{
+			System.out.println("Flee attempt failed ");
+		}
+		
+	}
 	
 }

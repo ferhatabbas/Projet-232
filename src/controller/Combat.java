@@ -33,7 +33,7 @@ public class Combat{
     public Combat(ArrayList<Dinosaure> listeDinoUser, ArrayList<Dinosaure> listeDino){
         state = null;
         initCombat(listeDinoUser, listeDino);
-        //view.Menu.StartCombat(UserTurn);
+        view.Menu.startCombat(UserTurn);
     }
 
     public ArrayList<Dinosaure> getUserDinolist() {
