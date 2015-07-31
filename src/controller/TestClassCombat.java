@@ -1,15 +1,18 @@
 package controller;
 
+import model.DinoAction;
 import model.DinoFactory;
 import model.Dinosaure;
 import model.Family;
+import model.TypeAction;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 /**
  * Created by Philippe on 2015-07-30.
@@ -74,8 +77,70 @@ public class TestClassCombat {
     @Test
     public void testAdjustDinolist()
     {
-        Dinosaure bob = listeCPU.get(0);
-        int value = bob.getLifePoint() - 2;
-        combat.AdjustDinolist(listeCPU, bob, true);
+    	ArrayList<Dinosaure> oldListeCPU = listeCPU;
+        Dinosaure target = listeCPU.get(0);
+        target.setLifePoint(target.getLifePoint() - 2);
+        combat.AdjustDinolist(listeCPU, target, false);
+        assertEquals(listeCPU, oldListeCPU);
+    }
+    
+    @Test
+    public void testApplyStrenghtAction()
+    {
+    	ArrayList<Dinosaure> oldListeCPU = listeCPU;
+    	Dinosaure target = listeCPU.get(0);
+    	
+    	DinoAction action = new DinoAction("testStrength", TypeAction.ImproveStrenghttype, 2);
+        combat.ApplyStrenghtAction(action, target, false);
+        
+        assertEquals(listeCPU, oldListeCPU);
+    }
+    
+    @Test
+    public void testApplySpeedAction()
+    {
+    	ArrayList<Dinosaure> oldListeCPU = listeCPU;
+    	Dinosaure target = listeCPU.get(0);
+    	
+    	DinoAction action = new DinoAction("testSpeed", TypeAction.ImproveSpeedtype, 2);
+        combat.ApplySpeedAction(action, target, false);
+        
+        assertEquals(listeCPU, oldListeCPU);
+    }
+    
+    @Test
+    public void testApplyHealthAction()
+    {
+    	ArrayList<Dinosaure> oldListeCPU = listeCPU;
+    	Dinosaure target = listeCPU.get(0);
+    	
+    	DinoAction action = new DinoAction("testHealth", TypeAction.Healttype, 2);
+        combat.ApplyHealthAction(action, target, false);
+        
+        assertEquals(listeCPU, oldListeCPU);
+    }
+    
+    @Test
+    public void testApplyDefenseAction()
+    {
+    	ArrayList<Dinosaure> oldListeCPU = listeCPU;
+    	Dinosaure target = listeCPU.get(0);
+    	
+    	DinoAction action = new DinoAction("testDefense", TypeAction.ImproveDefensetype, 2);
+        combat.ApplyDefenseAction(action, target, false);
+        
+        assertEquals(listeCPU, oldListeCPU);
+    }
+    
+    @Test
+    public void testApplyAttackAction()
+    {
+    	ArrayList<Dinosaure> oldListeCPU = listeCPU;
+    	Dinosaure target = listeCPU.get(0);
+    	
+    	DinoAction action = new DinoAction("testAttack", TypeAction.Atacktype, 1);
+        combat.ApplyAttackAction(action, target, false);
+        
+        assertEquals(listeCPU, oldListeCPU);
     }
 }

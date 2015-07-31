@@ -5,7 +5,6 @@ import model.Dinosaure;
 import model.TypeAction;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Random;
 
 /**
@@ -180,53 +179,60 @@ public class Combat{
             //NOT ENOUGH STRONG
             return;
         }
-        int previousLifePoint = target.getLifePoint();
-        target.setLifePoint(target.getLifePoint() + valueAplied);
+        
+        int health = target.getLifePoint();
+        target.setLifePoint(health - valueAplied);
         boolean isTargetAlive = isPositive(target.getLifePoint());
-        int ActualLifePoint = target.getLifePoint();
+        
         if(userSide){
             if (isTargetAlive){
                 AdjustDinolist(getComputerDinolist(), target, userSide);
+                view.Menu.ShowChangeInflicted(target, "Health(Alive)" , health, target.getLifePoint());
                 return;
             }
             else {
                 target.setLifePoint(0);
                 AdjustDinolist(getComputerDinolist(), target, userSide);
+                view.Menu.ShowChangeInflicted(target, "Health(Dead)" , health, target.getLifePoint());
                 return;
             }
         }
         else {
             if (isTargetAlive){
                 AdjustDinolist(getUserDinolist(), target, userSide);
+                view.Menu.ShowChangeInflicted(target, "Health(Alive)" , health, target.getLifePoint());
                 return;
             }
             else {
                 target.setLifePoint(0);
                 AdjustDinolist(getUserDinolist(), target, userSide);
+                view.Menu.ShowChangeInflicted(target, "Health(Dead)" , health, target.getLifePoint());
                 return;
             }
         }
-        //view.Menu.ShowChangeInflicted(target, previousLifePoint, ActualLifePoint);
     }
 
     public void ApplyDefenseAction(DinoAction action, Dinosaure target, boolean userSide){
-        int previousDefense = target.getDefense();
-        target.setDefense(target.getDefense() + action.getValue());
-        int ActualDefense = target.getDefense();
+        int oldDefense = target.getDefense();
+        int newDefense = action.getValue();
+        
+        target.setDefense(oldDefense + newDefense);
+        
         if (userSide){
             AdjustDinolist(getUserDinolist(), target, userSide);
+            view.Menu.ShowChangeInflicted(target, "Defense" , oldDefense, target.getDefense());
             return;
         }
         else {
             AdjustDinolist(getComputerDinolist(), target, userSide);
+            view.Menu.ShowChangeInflicted(target, "Defense" , oldDefense, target.getDefense());
             return;
         }
-        //view.Menu.ShowChangeInflicted(target, previousLifePoint, ActualLifePoint);
     }
 
     public void ApplyFleeAction(DinoAction action, Dinosaure target, boolean userSide){
 
-        boolean canFlee =getComputerDinolist().size() <= 1;
+        boolean canFlee = getComputerDinolist().size() <= 1;
         boolean tryFlee = getRandomBoolean(1);
         if (userSide){
             if(tryFlee){
@@ -252,45 +258,55 @@ public class Combat{
     }
 
     public void ApplyHealthAction(DinoAction action, Dinosaure target, boolean userSide){
-        int previousHealth = target.getLifePoint();
-        target.setLifePoint(target.getSpeed() + action.getValue());
-        int actualHealth = target.getLifePoint();
+        int oldHealth = target.getLifePoint();
+        int newHealth = action.getValue();
+        
+        target.setLifePoint(oldHealth + newHealth);
+        
         if (userSide){
             AdjustDinolist(getUserDinolist(), target, userSide);
+            view.Menu.ShowChangeInflicted(target, "Health" , oldHealth, target.getLifePoint());
             return;
         }
         else {
             AdjustDinolist(getComputerDinolist(), target, userSide);
+            view.Menu.ShowChangeInflicted(target, "Health" , oldHealth, target.getLifePoint());
             return;
         }
-        //view.Menu.ShowChangeInflicted(target, previousHealth, actualHealth)
     }
 
     public void ApplySpeedAction(DinoAction action, Dinosaure target, boolean userSide){
-        int previousSpeed = target.getSpeed();
-        target.setSpeed(target.getSpeed() + action.getValue());
-        int actualSpeed = target.getSpeed();
+        int oldSpeed = target.getSpeed();
+        int newSpeed = action.getValue();
+        
+        target.setSpeed(oldSpeed + newSpeed);
+        
         if (userSide){
             AdjustDinolist(getUserDinolist(), target, userSide);
+            view.Menu.ShowChangeInflicted(target, "Speed" , oldSpeed, target.getSpeed());
             return;
         }
         else {
             AdjustDinolist(getComputerDinolist(), target, userSide);
+            view.Menu.ShowChangeInflicted(target, "Speed" , oldSpeed, target.getSpeed());
             return;
         }
-        //view.Menu.ShowChangeInflicted(target, previousSpeed, actualSpeed)
     }
 
     public void ApplyStrenghtAction(DinoAction action, Dinosaure target, boolean userSide){
-        int previousStrenght = target.getStrenght();
-        target.setStrenght(target.getSpeed() + action.getValue());
-        int actualStrenght = target.getStrenght();
+        int oldStrength = target.getStrenght();
+        int newStrength = action.getValue();
+
+        target.setStrenght(oldStrength + newStrength);
+        
         if (userSide){
             AdjustDinolist(getUserDinolist(), target, userSide);
+            view.Menu.ShowChangeInflicted(target, "Strength" , oldStrength, target.getStrenght());
             return;
         }
         else {
             AdjustDinolist(getComputerDinolist(), target, userSide);
+            view.Menu.ShowChangeInflicted(target, "Strength" , oldStrength, target.getStrenght());
             return;
         }
     }
@@ -299,10 +315,10 @@ public class Combat{
 
         int index;
         if (isuser){
-            index = getComputerDinolist().indexOf(dino);
+            index = getUserDinolist().indexOf(dino);
 
         }else{
-            index = getUserDinolist().indexOf(dino);
+            index = getComputerDinolist().indexOf(dino);
         }
 
         targetList.remove(index);

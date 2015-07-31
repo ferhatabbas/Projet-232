@@ -7,6 +7,7 @@ import model.Breeding;
 import model.DinoAction;
 import model.Dinosaure;
 import controller.Combat;
+import controller.CombatScriptController;
 import controller.Game;
 /**
  * 
@@ -123,8 +124,8 @@ public class Menu {
 
 
 	private static void combat() {
-		CombatScriptController
-		
+		CombatScriptController controller = new CombatScriptController(combat.getUserDinolist(), combat.getComputerDinolist()); 
+		boolean matchResult = controller.Match();
 	}
 
 	public static void breedDino() {
@@ -279,11 +280,10 @@ public class Menu {
 		return computerDinolist.get(chooseTarget);
 	}
 	
-	public static void ShowChangeInflicted(Dinosaure target,int previousLifePoint, int actualLifePoint){
+	public static void ShowChangeInflicted(Dinosaure target, String changedValue, int oldValue, int newValue){
 		System.out.println("target: "+ target.getName());
-		System.out.println("previousLifePoint: "+ previousLifePoint);
-		System.out.println("actualLifePoint: "+ actualLifePoint);
-		
+		System.out.println("old"+ changedValue + " = " + oldValue);
+		System.out.println("new"+ changedValue + " = " + newValue);
 	}
 	
 	public static void FleeAttempt(boolean tryFlee, Dinosaure target, boolean userSide){
