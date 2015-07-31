@@ -36,7 +36,12 @@ public class DinoAction {
     }
 
     public void setValue(int value) {
-        this.value = value;
+        if(value < 0) {
+            this.value = 0;
+        }
+        else {
+            this.value = value;
+        }
     }
 
     public boolean equals(Object otherAction)

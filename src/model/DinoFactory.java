@@ -53,24 +53,27 @@ public class DinoFactory {
 		
 		return newDino;
 	}
-	
-	public static void construct() 
+
+	public static Dinosaure construct()
 	{
+		Dinosaure newDino = null;
 		int result = Dinosaure.Random(0, Family.values().length - 1);
 		
 		switch (result) {
-		case 0 : construct(Family.Velocyraptor);
+		case 0 : newDino = construct(Family.Velocyraptor);
 			break;
-		case 1 : construct(Family.Tyranosaure);
+		case 1 : newDino = construct(Family.Tyranosaure);
 			break;
-		case 2 : construct(Family.Stegosorus);
+		case 2 : newDino = construct(Family.Stegosorus);
 			break;
-		case 3 : construct(Family.Triceraptaure);
+		case 3 : newDino = construct(Family.Triceraptaure);
 			break;
-		case 4 : construct(Family.Azhdarchidea);
+		case 4 : newDino = construct(Family.Azhdarchidea);
 			break;
-		case 5 : construct(Family.Argentavis);
+		case 5 : newDino = construct(Family.Argentavis);
 			break;
 		}
+
+		return newDino;
 	}	
 }

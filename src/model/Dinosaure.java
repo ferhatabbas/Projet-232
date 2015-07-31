@@ -214,28 +214,27 @@ public abstract class Dinosaure extends Observable implements AICpu{
 				index = i;
 			}
 		}
-		return actionList.get(index);
+
+		int randomNumber = Dinosaure.Random(0,3);
+		if(randomNumber != 0 || actionList.get(index).getTypeAction() != TypeAction.Fleetype) {
+			if (randomNumber == 1) {
+				return new DecoratorIncrease(actionList.get(index)).modifyValueAction();
+			} else if (randomNumber == 2) {
+				return new DecoratorDecrease(actionList.get(index)).modifyValueAction();
+			} else {
+				return new DecoratorDouble(actionList.get(index)).modifyValueAction();
+			}
+		}
+		else {
+			return actionList.get(index);
+		}
 	}
 
 	protected void removeAttack(int indexList){
 		actionList.remove(indexList);
 	}
-	
-	public void printFeatureList() {
-		
-		for(Feature f: featureList){
-			switch (f){
-			case Regenaration :	System.out.println("Regenaration, ");
-				break;
-			case Learning :	System.out.println("Learning, ");
-				break;
-			case Durability :	System.out.println("Durability, ");
-				break;	
-			}
-		}
-	}
 
-    /* IMPLEMENTATION DES METHODES DES INTERFACES*/
+	/* IMPLEMENTATION DES METHODES DES INTERFACES*/
     /* AICpu */
 
     public int getTypeAlgo(){
