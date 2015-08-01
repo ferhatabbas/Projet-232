@@ -10,14 +10,17 @@ public class DinoFactory {
 		case Velocyraptor : newDino = new Velocyraptor();
 			break;
 		case Tyranosaure : newDino = new Tyranosaure();
+			newDino = new DecoratorDouble(newDino); // Possibilite d'action doubler
 			break;
 		case Stegosorus : newDino = new Stegosorus();
+			newDino = new DecoratorDecrease(newDino); // Possibilite d'action diminuer 0 à 2
 			break;
 		case Triceraptaure : newDino = new Triceraptaure();
 			break;
 		case Azhdarchidea : newDino = new Azhdarchidea();
 			break;
 		case Argentavis : newDino = new Argentavis();
+			newDino = new DecoratorIncrease(newDino); // Possibilite d'action augmenter de 0 à 2
 			break;
 			default:;
 		}
@@ -26,7 +29,8 @@ public class DinoFactory {
 	}
 
 	public static Dinosaure construct(String name, int lifePoint, int strenght, 
-			int speed, int defense, int xp, Family family, ArrayList<DinoAction> ListeAttack,  ArrayList<Feature> ListFeature) {
+			int speed, int defense, int xp, Family family, ArrayList<DinoAction> ListeAttack,
+            ArrayList<Feature> ListFeature) {
 		Dinosaure newDino = null;
 		
 		switch (family) {
@@ -35,9 +39,11 @@ public class DinoFactory {
 			break;
 		case Tyranosaure : newDino = new Tyranosaure(name, lifePoint, strenght, 
 				speed, defense, xp, ListeAttack, ListFeature);
+			newDino = new DecoratorDouble(newDino);
 			break;
 		case Stegosorus : newDino = new Stegosorus(name, lifePoint, strenght, 
 				speed, defense, xp, ListeAttack, ListFeature);
+			newDino = new DecoratorDecrease(newDino);
 			break;
 		case Triceraptaure : newDino = new Triceraptaure(name, lifePoint, strenght, 
 				speed, defense, xp, ListeAttack, ListFeature);
@@ -47,6 +53,7 @@ public class DinoFactory {
 			break;
 		case Argentavis : newDino = new Argentavis(name, lifePoint, strenght, 
 				speed, defense, xp, ListeAttack, ListFeature);
+			newDino = new DecoratorIncrease(newDino);
 			break;
 			default:;
 		}

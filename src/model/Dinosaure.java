@@ -215,19 +215,7 @@ public abstract class Dinosaure extends Observable implements AICpu{
 			}
 		}
 
-		int randomNumber = Dinosaure.Random(0,3);
-		if(randomNumber != 0 || actionList.get(index).getTypeAction() != TypeAction.Fleetype) {
-			if (randomNumber == 1) {
-				return new DecoratorIncrease(actionList.get(index)).modifyValueAction();
-			} else if (randomNumber == 2) {
-				return new DecoratorDecrease(actionList.get(index)).modifyValueAction();
-			} else {
-				return new DecoratorDouble(actionList.get(index)).modifyValueAction();
-			}
-		}
-		else {
-			return actionList.get(index);
-		}
+		return actionList.get(index);
 	}
 
 	protected void removeAttack(int indexList){

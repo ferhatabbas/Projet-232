@@ -10,7 +10,7 @@ public class Stegosorus extends Dinosaure {
 		setFamily(Family.Stegosorus);
 
 		// Specialisation du Dinosaure
-		setSpeed(speed - 4);
+		setSpeed(speed - 2);
 		setStrenght(strenght - 1);
 		setDefense(defense + 3);
 
