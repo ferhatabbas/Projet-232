@@ -63,7 +63,7 @@ public class Menu {
 			secondMenu();
 		}catch (Exception e)
 		{
-			System.out.println("Impossible de créer une nouvelle partie.");
+			System.out.println("Impossible to create a new game.");
 		}
 	}
 	
@@ -132,14 +132,16 @@ public class Menu {
 		String babyDinoName;
 		int choice1,choice2;
 		
-		System.out.println("Choose the numbers for the first and second dinosaur: ");
+		System.out.println("Here is the user dino list ");
 		for(int i=0; i< combat.getUserDinolist().size(); i++){
 			System.out.println(i + "- "+ combat.getUserDinolist().get(i).getName());
 			
 		}
+		System.out.println("Enter the number to choose the first dinosaur : ");
 		choice1 = _lecture.nextInt();
 		_lecture.nextLine();
 		Dinosaure dino1 = combat.getUserDinolist().get(choice1);
+		System.out.println("Enter the number to choose the second dinosaur : ");
 		choice2 = _lecture.nextInt();
 		_lecture.nextLine();
 		Dinosaure dino2 = combat.getUserDinolist().get(choice2);
