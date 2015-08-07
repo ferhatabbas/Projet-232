@@ -7,12 +7,13 @@ import model.TypeAction;
 import java.util.ArrayList;
 import java.util.Random;
 
-import view.MenuCommands;
+import view.Menu;
+
 
 /**
  * Created by Philippe on 2015-07-23.
  */
-public class Combat extends MenuCommands{
+public class Combat  {
 
     protected ArrayList<Dinosaure> InitialUserDinolist;
     protected ArrayList<Dinosaure> UserDinolist;
@@ -34,7 +35,7 @@ public class Combat extends MenuCommands{
     public Combat(ArrayList<Dinosaure> listeDinoUser, ArrayList<Dinosaure> listeDino){
         state = null;
         initCombat(listeDinoUser, listeDino);
-        startCombat(UserTurn);
+        view.Menu.startCombat(UserTurn);
     }
 
     public ArrayList<Dinosaure> getUserDinolist() {
@@ -131,14 +132,14 @@ public class Combat extends MenuCommands{
     }
 
     public void chooseActionUser(Dinosaure dino){
-        /*
+        
         boolean userSide = true;
-        DinoAction actionChosen = ChooseActionDino(dino);
-        Dinosaure target = ChooseTarget(actionChosen);
+        DinoAction actionChosen = Menu.chooseAction(dino);
+        Dinosaure target = Menu.chooseTarget(ComputerDinolist);
         if (target == null){return;} //ERROR
         ApplyAction(actionChosen, target, userSide);
-        view.Menu.ShowDamageInflicted();
-        */
+        view.Menu.showDamageInflicted();
+        
     }
 
     public Dinosaure GenerateTarget(){
@@ -150,17 +151,17 @@ public class Combat extends MenuCommands{
         }
         return null; //ERROR
     }
-    /*
-    public DinoAction ChooseAction(Dinosaure dino){
-        //DinoAction actionChosen;
-        //return  actionChosen = view.Menu.ChooseAction(dino.getActionList());
+    
+    public DinoAction chooseAction(Dinosaure dino){
+        DinoAction actionChosen;
+        return  actionChosen = view.Menu.chooseAction(dino);
     }
 
-    public Dinosaure ChooseTarget(){
-        //Dinosaure target;
-        //return  target = view.Menu.ChooseTarget(getComputerDinolist());
+    public Dinosaure chooseTarget(){
+        Dinosaure target;
+        return  target = view.Menu.chooseTarget(getComputerDinolist());
     }
-    */
+    
     public void ApplyAction(DinoAction action, Dinosaure target, Boolean userSide){
         TypeAction type = action.getTypeAction();
 
@@ -189,26 +190,26 @@ public class Combat extends MenuCommands{
         if(userSide){
             if (isTargetAlive){
                 AdjustDinolist(getComputerDinolist(), target, userSide);
-                showChangeInflicted(target, "Health(Alive)" , health, target.getLifePoint());
+                view.Menu.showChangeInflicted(target, "Health(Alive)" , health, target.getLifePoint());
                 return;
             }
             else {
                 target.setLifePoint(0);
                 AdjustDinolist(getComputerDinolist(), target, userSide);
-                showChangeInflicted(target, "Health(Dead)" , health, target.getLifePoint());
+                view.Menu.showChangeInflicted(target, "Health(Dead)" , health, target.getLifePoint());
                 return;
             }
         }
         else {
             if (isTargetAlive){
                 AdjustDinolist(getUserDinolist(), target, userSide);
-                showChangeInflicted(target, "Health(Alive)" , health, target.getLifePoint());
+                view.Menu.showChangeInflicted(target, "Health(Alive)" , health, target.getLifePoint());
                 return;
             }
             else {
                 target.setLifePoint(0);
                 AdjustDinolist(getUserDinolist(), target, userSide);
-                showChangeInflicted(target, "Health(Dead)" , health, target.getLifePoint());
+                view.Menu.showChangeInflicted(target, "Health(Dead)" , health, target.getLifePoint());
                 return;
             }
         }
@@ -222,12 +223,12 @@ public class Combat extends MenuCommands{
         
         if (userSide){
             AdjustDinolist(getUserDinolist(), target, userSide);
-            showChangeInflicted(target, "Defense" , oldDefense, target.getDefense());
+            view.Menu.showChangeInflicted(target, "Defense" , oldDefense, target.getDefense());
             return;
         }
         else {
             AdjustDinolist(getComputerDinolist(), target, userSide);
-            showChangeInflicted(target, "Defense" , oldDefense, target.getDefense());
+            view.Menu.showChangeInflicted(target, "Defense" , oldDefense, target.getDefense());
             return;
         }
     }
@@ -256,7 +257,7 @@ public class Combat extends MenuCommands{
                 return;
             }
         }
-        //view.Menu.FleeAttempt(tryFlee, target, userSide);
+        view.Menu.FleeAttempt(tryFlee, target, userSide);
     }
 
     public void ApplyHealthAction(DinoAction action, Dinosaure target, boolean userSide){
@@ -267,12 +268,12 @@ public class Combat extends MenuCommands{
         
         if (userSide){
             AdjustDinolist(getUserDinolist(), target, userSide);
-            showChangeInflicted(target, "Health" , oldHealth, target.getLifePoint());
+            view.Menu.showChangeInflicted(target, "Health" , oldHealth, target.getLifePoint());
             return;
         }
         else {
             AdjustDinolist(getComputerDinolist(), target, userSide);
-            showChangeInflicted(target, "Health" , oldHealth, target.getLifePoint());
+            view.Menu.showChangeInflicted(target, "Health" , oldHealth, target.getLifePoint());
             return;
         }
     }
@@ -285,12 +286,12 @@ public class Combat extends MenuCommands{
         
         if (userSide){
             AdjustDinolist(getUserDinolist(), target, userSide);
-            showChangeInflicted(target, "Speed" , oldSpeed, target.getSpeed());
+            view.Menu.showChangeInflicted(target, "Speed" , oldSpeed, target.getSpeed());
             return;
         }
         else {
             AdjustDinolist(getComputerDinolist(), target, userSide);
-            showChangeInflicted(target, "Speed" , oldSpeed, target.getSpeed());
+            view.Menu.showChangeInflicted(target, "Speed" , oldSpeed, target.getSpeed());
             return;
         }
     }
@@ -303,12 +304,12 @@ public class Combat extends MenuCommands{
         
         if (userSide){
             AdjustDinolist(getUserDinolist(), target, userSide);
-            showChangeInflicted(target, "Strength" , oldStrength, target.getStrenght());
+            view.Menu.showChangeInflicted(target, "Strength" , oldStrength, target.getStrenght());
             return;
         }
         else {
             AdjustDinolist(getComputerDinolist(), target, userSide);
-            showChangeInflicted(target, "Strength" , oldStrength, target.getStrenght());
+            view.Menu.showChangeInflicted(target, "Strength" , oldStrength, target.getStrenght());
             return;
         }
     }
