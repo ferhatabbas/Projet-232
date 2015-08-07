@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <savegame>
-  <username>ALEX</username>
+  <username>Alexandre</username>
   <dinosaures>
     <dinosaure>
-      <name>pewpew</name>
-      <lifepoint>12</lifepoint>
-      <strenght>6</strenght>
-      <speed>4</speed>
+      <name>Rex</name>
+      <lifepoint>15</lifepoint>
+      <strenght>4</strenght>
+      <speed>2</speed>
       <defense>5</defense>
       <xp>0</xp>
-      <family>null</family>
+      <family>Tyranosaure</family>
       <attacks>
         <attack>
           <name>Break</name>
@@ -231,116 +231,17 @@
           <type>ImproveSpeedtype</type>
           <value>2</value>
         </attack>
-        <attack>
-          <name>Break</name>
-          <type>Healttype</type>
-          <value>2</value>
-        </attack>
-        <attack>
-          <name>LongBreak</name>
-          <type>Healttype</type>
-          <value>4</value>
-        </attack>
-        <attack>
-          <name>Punch</name>
-          <type>Atacktype</type>
-          <value>1</value>
-        </attack>
-        <attack>
-          <name>Kick</name>
-          <type>Atacktype</type>
-          <value>2</value>
-        </attack>
-        <attack>
-          <name>Double_Punch</name>
-          <type>Atacktype</type>
-          <value>2</value>
-        </attack>
-        <attack>
-          <name>Double_Kick</name>
-          <type>Atacktype</type>
-          <value>4</value>
-        </attack>
-        <attack>
-          <name>Flee</name>
-          <type>Fleetype</type>
-          <value>0</value>
-        </attack>
-        <attack>
-          <name>Block</name>
-          <type>ImproveDefensetype</type>
-          <value>1</value>
-        </attack>
-        <attack>
-          <name>Shield</name>
-          <type>ImproveDefensetype</type>
-          <value>2</value>
-        </attack>
-        <attack>
-          <name>PowerStrenght</name>
-          <type>ImproveStrenghttype</type>
-          <value>1</value>
-        </attack>
-        <attack>
-          <name>Accelerator</name>
-          <type>ImproveSpeedtype</type>
-          <value>2</value>
-        </attack>
-        <attack>
-          <name>Break</name>
-          <type>Healttype</type>
-          <value>2</value>
-        </attack>
-        <attack>
-          <name>LongBreak</name>
-          <type>Healttype</type>
-          <value>4</value>
-        </attack>
-        <attack>
-          <name>Punch</name>
-          <type>Atacktype</type>
-          <value>1</value>
-        </attack>
-        <attack>
-          <name>Kick</name>
-          <type>Atacktype</type>
-          <value>2</value>
-        </attack>
-        <attack>
-          <name>Double_Punch</name>
-          <type>Atacktype</type>
-          <value>2</value>
-        </attack>
-        <attack>
-          <name>Double_Kick</name>
-          <type>Atacktype</type>
-          <value>4</value>
-        </attack>
-        <attack>
-          <name>Flee</name>
-          <type>Fleetype</type>
-          <value>0</value>
-        </attack>
-        <attack>
-          <name>Block</name>
-          <type>ImproveDefensetype</type>
-          <value>1</value>
-        </attack>
-        <attack>
-          <name>Shield</name>
-          <type>ImproveDefensetype</type>
-          <value>2</value>
-        </attack>
-        <attack>
-          <name>PowerStrenght</name>
-          <type>ImproveStrenghttype</type>
-          <value>1</value>
-        </attack>
-        <attack>
-          <name>Accelerator</name>
-          <type>ImproveSpeedtype</type>
-          <value>2</value>
-        </attack>
+      </attacks>
+    </dinosaure>
+    <dinosaure>
+      <name>Bronto</name>
+      <lifepoint>14</lifepoint>
+      <strenght>6</strenght>
+      <speed>6</speed>
+      <defense>7</defense>
+      <xp>0</xp>
+      <family>Stegosorus</family>
+      <attacks>
         <attack>
           <name>Break</name>
           <type>Healttype</type>
@@ -565,8 +466,9 @@
     </dinosaure>
   </dinosaures>
   <logs>
-    <log type="0" datetime="2015-08-06 08:00:41">ALEX</log>
-    <log type="1" datetime="2015-08-06 08:00:41">pewpew</log>
+    <log type="0" datetime="2015-08-06 07:51:08">Alexandre</log>
+    <log type="1" datetime="2015-08-06 07:51:08">REX</log>
+    <log type="1" datetime="2015-08-05 05:51:08">Bronto</log>
   </logs>
 </savegame>
 
