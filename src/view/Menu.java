@@ -143,12 +143,11 @@ public class Menu {
 	String name = _lecture.nextLine();
 	System.out.println("Please enter the family of the dinosaur : ");
 	String family = _lecture.nextLine();
-
-    if(_game.createDino(name,family)){
-        System.out.println("Creation successfull");
-	}
-    else{
-    	System.out.println("Creation failed");
+    try{
+    	_game.createDino(name,family);
+    	System.out.println("Creation successfull");
+	}catch (Exception e){
+		System.out.println("Creation failed");
 	}
 	}
 
