@@ -2,6 +2,7 @@ package controller;
 
 import model.Dinosaure;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  * Created by Philippe on 2015-07-30.
@@ -13,8 +14,8 @@ public class CombatScriptController {
     protected UserTurnCombatState userTurnCombatState;
     protected EndCombatState endCombatState;
 
-    public CombatScriptController(ArrayList< Dinosaure > listeDinoUser, ArrayList<Dinosaure> listeDino) {
-        combat = new Combat(listeDinoUser, listeDino);
+    public CombatScriptController(Scanner lecture, ArrayList< Dinosaure > listeDinoUser, ArrayList<Dinosaure> listeDino) {
+        combat = new Combat(lecture, listeDinoUser, listeDino);
         startCombatState = new StartCombatState();
         cpuTurnCombatState = new CPUTurnCombatState();
         userTurnCombatState = new UserTurnCombatState();

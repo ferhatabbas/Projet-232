@@ -6,6 +6,7 @@ import model.TypeAction;
 
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Scanner;
 
 import view.Menu;
 
@@ -24,6 +25,8 @@ public class Combat  {
 
     private CombatState state;
 
+    private Scanner _lecture;
+
     public void setState(CombatState state){
         this.state = state;
     }
@@ -32,10 +35,11 @@ public class Combat  {
         return state;
     }
 
-    public Combat(ArrayList<Dinosaure> listeDinoUser, ArrayList<Dinosaure> listeDino){
+    public Combat(Scanner lecture, ArrayList<Dinosaure> listeDinoUser, ArrayList<Dinosaure> listeDino){
+        _lecture = lecture;
         state = null;
         initCombat(listeDinoUser, listeDino);
-        view.Menu.startCombat(UserTurn);
+        startCombat(UserTurn);
     }
 
     public ArrayList<Dinosaure> getUserDinolist() {
@@ -134,11 +138,11 @@ public class Combat  {
     public void chooseActionUser(Dinosaure dino){
         
         boolean userSide = true;
-        DinoAction actionChosen = Menu.chooseAction(dino);
-        Dinosaure target = Menu.chooseTarget(ComputerDinolist);
+        DinoAction actionChosen = chooseAction(dino);
+        Dinosaure target = chooseTarget(ComputerDinolist);
         if (target == null){return;} //ERROR
         ApplyAction(actionChosen, target, userSide);
-        view.Menu.showDamageInflicted();
+        showDamageInflicted();
         
     }
 
@@ -151,15 +155,10 @@ public class Combat  {
         }
         return null; //ERROR
     }
-    
-    public DinoAction chooseAction(Dinosaure dino){
-        DinoAction actionChosen;
-        return  actionChosen = view.Menu.chooseAction(dino);
-    }
 
     public Dinosaure chooseTarget(){
         Dinosaure target;
-        return  target = view.Menu.chooseTarget(getComputerDinolist());
+        return  target = chooseTarget(getComputerDinolist());
     }
     
     public void ApplyAction(DinoAction action, Dinosaure target, Boolean userSide){
@@ -190,26 +189,26 @@ public class Combat  {
         if(userSide){
             if (isTargetAlive){
                 AdjustDinolist(getComputerDinolist(), target, userSide);
-                view.Menu.showChangeInflicted(target, "Health(Alive)" , health, target.getLifePoint());
+                showChangeInflicted(target, "Health(Alive)" , health, target.getLifePoint());
                 return;
             }
             else {
                 target.setLifePoint(0);
                 AdjustDinolist(getComputerDinolist(), target, userSide);
-                view.Menu.showChangeInflicted(target, "Health(Dead)" , health, target.getLifePoint());
+                showChangeInflicted(target, "Health(Dead)" , health, target.getLifePoint());
                 return;
             }
         }
         else {
             if (isTargetAlive){
                 AdjustDinolist(getUserDinolist(), target, userSide);
-                view.Menu.showChangeInflicted(target, "Health(Alive)" , health, target.getLifePoint());
+                showChangeInflicted(target, "Health(Alive)" , health, target.getLifePoint());
                 return;
             }
             else {
                 target.setLifePoint(0);
                 AdjustDinolist(getUserDinolist(), target, userSide);
-                view.Menu.showChangeInflicted(target, "Health(Dead)" , health, target.getLifePoint());
+                showChangeInflicted(target, "Health(Dead)" , health, target.getLifePoint());
                 return;
             }
         }
@@ -223,12 +222,12 @@ public class Combat  {
         
         if (userSide){
             AdjustDinolist(getUserDinolist(), target, userSide);
-            view.Menu.showChangeInflicted(target, "Defense" , oldDefense, target.getDefense());
+            showChangeInflicted(target, "Defense" , oldDefense, target.getDefense());
             return;
         }
         else {
             AdjustDinolist(getComputerDinolist(), target, userSide);
-            view.Menu.showChangeInflicted(target, "Defense" , oldDefense, target.getDefense());
+            showChangeInflicted(target, "Defense" , oldDefense, target.getDefense());
             return;
         }
     }
@@ -257,7 +256,7 @@ public class Combat  {
                 return;
             }
         }
-        view.Menu.FleeAttempt(tryFlee, target, userSide);
+        FleeAttempt(tryFlee, target, userSide);
     }
 
     public void ApplyHealthAction(DinoAction action, Dinosaure target, boolean userSide){
@@ -268,12 +267,12 @@ public class Combat  {
         
         if (userSide){
             AdjustDinolist(getUserDinolist(), target, userSide);
-            view.Menu.showChangeInflicted(target, "Health" , oldHealth, target.getLifePoint());
+            showChangeInflicted(target, "Health" , oldHealth, target.getLifePoint());
             return;
         }
         else {
             AdjustDinolist(getComputerDinolist(), target, userSide);
-            view.Menu.showChangeInflicted(target, "Health" , oldHealth, target.getLifePoint());
+            showChangeInflicted(target, "Health" , oldHealth, target.getLifePoint());
             return;
         }
     }
@@ -286,12 +285,12 @@ public class Combat  {
         
         if (userSide){
             AdjustDinolist(getUserDinolist(), target, userSide);
-            view.Menu.showChangeInflicted(target, "Speed" , oldSpeed, target.getSpeed());
+            showChangeInflicted(target, "Speed" , oldSpeed, target.getSpeed());
             return;
         }
         else {
             AdjustDinolist(getComputerDinolist(), target, userSide);
-            view.Menu.showChangeInflicted(target, "Speed" , oldSpeed, target.getSpeed());
+            showChangeInflicted(target, "Speed" , oldSpeed, target.getSpeed());
             return;
         }
     }
@@ -304,12 +303,12 @@ public class Combat  {
         
         if (userSide){
             AdjustDinolist(getUserDinolist(), target, userSide);
-            view.Menu.showChangeInflicted(target, "Strength" , oldStrength, target.getStrenght());
+            showChangeInflicted(target, "Strength" , oldStrength, target.getStrenght());
             return;
         }
         else {
             AdjustDinolist(getComputerDinolist(), target, userSide);
-            view.Menu.showChangeInflicted(target, "Strength" , oldStrength, target.getStrenght());
+            showChangeInflicted(target, "Strength" , oldStrength, target.getStrenght());
             return;
         }
     }
@@ -345,6 +344,109 @@ public class Combat  {
 
     public CombatState GetUserTurnCombatState(){
         return state;
+    }
+
+    private static void startCombat(Boolean userTurn){
+        System.out.println("Combat Starting!:");
+        WhoHaveTurn(userTurn);
+    }
+
+    private static void WhoHaveTurn(Boolean userTurn){
+        System.out.println("Determining Who Start First!");
+        if(userTurn){
+            System.out.println("User Turn! ");
+        }
+        else {
+            System.out.println("Cpu Turn! ");
+        }
+    }
+
+    public static void showCombatStatus(ArrayList<Dinosaure> userDinolist, ArrayList<Dinosaure> computerDinolist){
+
+        for(int i=0; i< userDinolist.size();i++){
+            System.out.println("Name : " + userDinolist.get(i).getName());
+            System.out.println("Strenght : " + userDinolist.get(i).getStrenght());
+            System.out.println("Speed : " + userDinolist.get(i).getSpeed());
+            System.out.println("Defense : " + userDinolist.get(i).getDefense());
+        }
+
+        for(int j=0; j< computerDinolist.size();j++){
+            System.out.println("Name : " + computerDinolist.get(j).getName());
+            System.out.println("Strenght : " + computerDinolist.get(j).getStrenght());
+            System.out.println("Speed : " + computerDinolist.get(j).getSpeed());
+            System.out.println("Defense : " + computerDinolist.get(j).getDefense());
+        }
+    }
+
+    private void showDamageInflicted(){
+        if(this.getUserTurn()){
+            for(int i=0; i< this.getComputerDinolist().size();i++){
+                System.out.println("LifePoint : " + this.getComputerDinolist().get(i).getLifePoint());
+                System.out.println("Xp : " + this.getComputerDinolist().get(i).getXp());
+            }
+        }
+        else {
+            for(int i=0; i< this.getUserDinolist().size();i++){
+                System.out.println("LifePoint : " + this.getUserDinolist().get(i).getLifePoint());
+                System.out.println("Xp : " + this.getUserDinolist().get(i).getXp());
+
+            }
+
+        }
+    }
+
+    private DinoAction chooseAction(Dinosaure dino){
+
+        int chooseAttack;
+
+        System.out.println("Choose the number of your attack: ");
+        for(int i=0; i< dino.getActionList().size(); i++){
+            System.out.println(i + "- "+ dino.getActionList().get(i).getActionName());
+
+        }
+        chooseAttack = _lecture.nextInt();
+        _lecture.nextLine();
+        _lecture.close();
+
+
+        return dino.getActionList().get(chooseAttack);
+    }
+
+    private Dinosaure chooseTarget(ArrayList<Dinosaure> computerDinolist){
+        int chooseTarget;
+
+        System.out.println("Choose a number for your target: ");
+        for(int i=0; i< computerDinolist.size(); i++){
+            System.out.println(i + "- "+ computerDinolist.get(i).getName());
+
+        }
+        chooseTarget = _lecture.nextInt();
+        _lecture.nextLine();
+        _lecture.close();
+
+        return computerDinolist.get(chooseTarget);
+    }
+
+    private void showChangeInflicted(Dinosaure target, String changedValue, int oldValue, int newValue){
+        System.out.println("target: "+ target.getName());
+        System.out.println("old"+ changedValue + " = " + oldValue);
+        System.out.println("new" + changedValue + " = " + newValue);
+    }
+
+    private void FleeAttempt(boolean tryFlee, Dinosaure target, boolean userSide){
+
+        if(tryFlee == true){
+            if(userSide == true){
+                System.out.println("Your dinosaur flew... ");
+            }
+            else{
+                System.out.println(target.getName() +"flew... ");
+            }
+        }
+        else{
+            System.out.println("Flee attempt failed ");
+        }
+
     }
 
 }

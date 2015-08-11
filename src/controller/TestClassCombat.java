@@ -50,8 +50,8 @@ public class TestClassCombat {
         listeCPU.add(triceraptaure);
         listeCPU.add(tyranosaure);
         listeCPU.add(velocyraptor);
-        controller = new CombatScriptController(listeUser, listeCPU);
-        combat = new Combat(listeUser, listeCPU);
+        //controller = new CombatScriptController(listeUser, listeCPU);
+        //combat = new Combat(listeUser, listeCPU);
     }
 
     @After
