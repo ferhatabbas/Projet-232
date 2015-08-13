@@ -19,12 +19,15 @@ public class LoadGameHandler extends Command {
     @Override
     public void execute() {
         System.out.println("Please enter your username : ");
+        String username = get_lecture().nextLine();
         try {
-            _game.loadGameFromXml(_lecture.nextLine());
-            secondMenuCommand.execute();
+            _game.loadGameFromXml(username);
         }catch (Exception e)
         {
-            System.out.println("Impossible to load the game.");
+            System.out.println("Impossible to load the game. A new game has been created.");
+            _game.initialize(username);
+            _game.save();
         }
+        secondMenuCommand.execute();
     }
 }

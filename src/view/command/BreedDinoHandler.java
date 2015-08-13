@@ -21,7 +21,7 @@ public class BreedDinoHandler extends Command {
         int choice1,choice2;
 
         System.out.println("Here is the user dino list ");
-        int i = 1;
+        int i = 0;
         for(Dinosaure d : _game.get_dinos()){
             System.out.println(i + "- "+ d.getName());
             i += 1;
@@ -37,7 +37,6 @@ public class BreedDinoHandler extends Command {
         System.out.println("Choose a name for the baby dinosaur: ");
         babyDinoName = _lecture.next();
         _lecture.nextLine();
-        _lecture.close();
         _game.get_dinos().add( Breeding.newBreeding(dino1, dino2, babyDinoName));
     }
 }

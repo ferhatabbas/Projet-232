@@ -64,7 +64,8 @@ public class Breeding {
 	private static ArrayList<Feature> choiceFeature(Dinosaure dino1, Dinosaure dino2) {
 		ArrayList<Feature> newFeatureList = new ArrayList<Feature>();
 
-		for(int i = 0 ; i < Feature.values().length; i++) {
+		//REMOVED FOR DEMO
+		/*for(int i = 0 ; i < Feature.values().length; i++) {
 			if(dino1.getFeatureList().contains(Feature.values()[i]) &&
 					dino2.getFeatureList().contains(Feature.values()[i])) {
 				newFeatureList.add(Feature.values()[i]);
@@ -75,7 +76,11 @@ public class Breeding {
 					newFeatureList.add(Feature.values()[i]);
 				}
 			}
-		}
+		}*/
+
+		newFeatureList.add(Feature.Durability);
+		newFeatureList.add(Feature.Faster);
+
 		return newFeatureList;
 	}
 }

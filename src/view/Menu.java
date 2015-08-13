@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 /**
  - *
- - * @author carolenaka, sebastien and vahei
+ - * @author carolenaka, sebastien and alexandre
  - *
  - */
 

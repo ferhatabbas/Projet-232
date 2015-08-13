@@ -24,7 +24,7 @@ public class CombatScriptController {
     public boolean Match(){
         startCombatState.doAction(combat);
         Boolean UserTurn = combat.getUserTurn();
-        while (combat.checkIfFinished()) {
+        while (!combat.checkIfFinished()) {
             if (UserTurn) {
                 userTurnCombatState.doAction(combat);
             } else {

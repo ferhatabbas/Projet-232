@@ -14,16 +14,14 @@ import java.util.Scanner;
  */
 public class CombatHandler extends Command {
 
-    Combat combat;
-
     public CombatHandler(Game game, Scanner lecture) {
         super(game, lecture);
     }
 
     @Override
     public void execute() {
-        CombatScriptController controller = new CombatScriptController(get_lecture(), get_game().get_dinos(), combat.getComputerDinolist());
-        boolean matchResult = controller.Match();
+        CombatScriptController controller = new CombatScriptController(get_lecture(), get_game().get_dinos(), get_game().get_dinos());
+        controller.Match();
     }
 
 

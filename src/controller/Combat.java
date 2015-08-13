@@ -88,7 +88,7 @@ public class Combat  {
     }
 
     public void loadUserDino(ArrayList<Dinosaure> listeDino){
-        setComputerDinolist(listeDino);
+        setUserDinolist(listeDino);
         setInitialUserDinolist(listeDino);
     }
 
@@ -406,7 +406,6 @@ public class Combat  {
         }
         chooseAttack = _lecture.nextInt();
         _lecture.nextLine();
-        _lecture.close();
 
 
         return dino.getActionList().get(chooseAttack);
@@ -422,7 +421,6 @@ public class Combat  {
         }
         chooseTarget = _lecture.nextInt();
         _lecture.nextLine();
-        _lecture.close();
 
         return computerDinolist.get(chooseTarget);
     }
